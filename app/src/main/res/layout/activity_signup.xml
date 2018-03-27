@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="4sp"
+    tools:context="cool.test.mycollege.signup"
+    android:orientation="vertical">
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/semail"
+        android:hint="email"
+        android:inputType="textEmailAddress"
+        android:layout_margin="3sp"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spassword"
+        android:hint="password"
+        android:layout_margin="3sp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sname"
+        android:hint="name"
+        android:layout_margin="3sp"/>
+
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="GO"
+    android:layout_margin="25sp"
+    android:layout_gravity="center"
+    android:id="@+id/go"
+    />
+
+
+
+
+</LinearLayout>

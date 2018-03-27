@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/layout_cardview"
+    android:clickable="true">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5sp"
+        android:clickable="true"
+        android:elevation="10sp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="7sp"
+            >
+
+
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/blooo">
+
+    <ProgressBar
+        android:layout_width="25sp"
+        android:layout_height="25sp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+            <ImageView
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+           android:id="@+id/productimage"
+                android:layout_marginRight="7sp"/>
+
+</RelativeLayout>
+       <TextView
+           android:id="@+id/producttittle"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Product name"
+           android:textAppearance="@style/TextAppearance.AppCompat.Large"
+           android:textStyle="bold"
+           android:layout_toEndOf="@+id/blooo"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs : 00"
+                android:textColor="#212121"
+                android:layout_toEndOf="@+id/blooo"
+                android:textSize="18sp"
+                android:layout_below="@+id/producttittle"
+                android:id="@+id/money"/>
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="love the awesomeness of this camera just in a very cool price come get it only in My College app .... yooo"
+           android:textAppearance="@style/TextAppearance.AppCompat.Small"
+           android:layout_toEndOf="@+id/blooo"
+           android:layout_below="@+id/money"
+           android:background="@color/cardview_light_background"
+           android:id="@+id/productdesc"
+           />
+
+            <android.support.design.widget.FloatingActionButton
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:id="@+id/floatti"/>
+
+   </RelativeLayout>
+</android.support.v7.widget.CardView>
+
+</LinearLayout>

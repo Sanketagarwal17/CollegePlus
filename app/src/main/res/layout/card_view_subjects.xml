@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/layout_cardview"
+    android:clickable="true">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5sp"
+        android:clickable="true"
+        android:elevation="10sp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="7sp"
+            >
+
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/blooo"
+                android:padding="10sp">
+                <TextView
+                    android:id="@+id/producttittle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your Freaky Subject"
+                    android:maxWidth="260sp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:layout_alignParentLeft="true"
+                    android:textStyle="bold"
+                    />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:id="@+id/linkdownload"
+                    android:layout_alignParentRight="true"
+                    />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/linkshare"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:layout_toStartOf="@+id/linkdownload"
+                    android:layout_marginRight="10sp"/>
+
+
+
+
+            </RelativeLayout>
+
+
+
+
+
+   </RelativeLayout>
+</android.support.v7.widget.CardView>
+
+</LinearLayout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageview"
+            android:layout_width="300sp"
+            android:layout_height="300sp"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:src="@drawable/upload"
+
+            />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageview"
+            >
+
+            <EditText
+                android:id="@+id/projectname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Product Name :" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/blabla"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/input_layout_email"
+
+            >
+
+            <EditText
+                android:id="@+id/projectdesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Product Desc :" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/blablaw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/blabla"
+
+            >
+
+            <EditText
+                android:id="@+id/productprice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Price :"
+                android:inputType="number"/>
+        </android.support.design.widget.TextInputLayout>
+
+
+
+
+
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/blablaw"
+            android:layout_margin="8sp"
+            android:text="Object Type :"
+            android:textSize="17sp"
+            android:textStyle="bold"
+
+            android:id="@+id/objectt"/>
+
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/blablaw"
+            android:layout_toEndOf="@+id/objectt"
+            android:id="@+id/typespinner"
+            android:gravity="center"
+            android:layout_marginTop="7sp">
+
+        </Spinner>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/blablawn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/objectt"
+
+            >
+
+            <EditText
+                android:id="@+id/contactno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Contact No :"
+                android:inputType="number"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

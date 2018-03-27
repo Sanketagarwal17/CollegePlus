@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "28186141440",
+    "firebase_url": "https://mycollege-8d6f0.firebaseio.com",
+    "project_id": "mycollege-8d6f0",
+    "storage_bucket": "mycollege-8d6f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28186141440:android:7585c2bd9157accf",
+        "android_client_info": {
+          "package_name": "cool.test.mycollege"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "28186141440-4q1o84lsp2qeargrs98hkul5hbl0l1o2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cool.test.mycollege",
+            "certificate_hash": "8e38802a9d4078f8cc6cbdd9181f5c8a67f01cbd"
+          }
+        },
+        {
+          "client_id": "28186141440-lmrp08tot85j2a7kuht2h7khhtpsul5m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVBofBUD7r3hn0-pSDBIv5Pm1c2a47gNY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "28186141440-lmrp08tot85j2a7kuht2h7khhtpsul5m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

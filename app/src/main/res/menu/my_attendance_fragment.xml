@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view">
+
+        <item
+            android:id="@+id/editweek"
+            android:title="Edit Timetable" />
+        <item
+            android:id="@+id/showattendance"
+            android:title="Edit Attendance" />
+
+
+    <item
+        android:id="@+id/settings"
+        android:title="Edit Subjects" />
+
+    <item
+        android:id="@+id/alarm"
+        app:showAsAction="always"
+        android:onClick="alarmButtonClicked"
+        android:icon="@drawable/ic_alarm_black_24dp" />
+
+</menu>
