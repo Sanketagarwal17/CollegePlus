@@ -50,7 +50,7 @@ public class HomePage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 Intent ii;
 FirebaseDatabase database;
-MenuItem menuItem1,menuItem2,menuItem3,blab;
+MenuItem menuItem1,menuItem2,menuItem3,blab,menuitem4;
     Fragment menuFragment=null;
 
     @Override
@@ -118,6 +118,8 @@ MenuItem menuItem1,menuItem2,menuItem3,blab;
         menuItem2.setVisible(false);
         menuItem3= menu.findItem(R.id.showattendance);
         menuItem3.setVisible(false);
+        menuitem4=menu.findItem(R.id.myuploaddd);
+        menuitem4.setVisible(true);
         blab=menu.findItem(R.id.alarm);
         blab.setVisible(false);
         super.onCreateOptionsMenu(menu);
@@ -205,6 +207,11 @@ MenuItem menuItem1,menuItem2,menuItem3,blab;
 
             Intent attendanceIntent = new Intent(this,AttendanceInfo.class);
             startActivityForResult(attendanceIntent,48);
+
+        }
+        else if (id== R.id.myuploaddd){
+            Intent i=new Intent(this, Myuploads.class);
+            startActivity(i);
 
         }
 
@@ -347,15 +354,25 @@ MenuItem menuItem1,menuItem2,menuItem3,blab;
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+if (id==R.id.cprofile){
+            menuitem4.setVisible(true);
+            menuItem2.setVisible(false);
+            blab.setVisible(false);
 
-        if (id == R.id.cattendancemanager){
-            menuItem2.setVisible(true);
+            menuItem1.setVisible(false);
+            menuItem3.setVisible(false);
+        }
+
+        else if (id == R.id.cattendancemanager){
+    menuitem4.setVisible(false);
+
+    menuItem2.setVisible(true);
             menuItem1.setVisible(true);
             blab.setVisible(true);
 
             menuItem3.setVisible(true);
         }else {
-
+            menuitem4.setVisible(false);
             menuItem2.setVisible(false);
             blab.setVisible(false);
 

@@ -17,6 +17,10 @@
         android:title="Edit Subjects" />
 
     <item
+        android:id="@+id/myuploaddd"
+        android:title="My Uploads" />
+
+    <item
         android:id="@+id/alarm"
         app:showAsAction="always"
         android:onClick="alarmButtonClicked"

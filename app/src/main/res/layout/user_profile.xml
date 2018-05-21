@@ -80,14 +80,15 @@
             android:orientation="vertical">
 
             <Button
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
+                android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="#fff"
                 android:elevation="4dp"
                 android:padding="20dp"
                 android:id="@+id/myuploads"
-                android:text="My Uploads" />
+                android:text="Log Out" />
 
 
 

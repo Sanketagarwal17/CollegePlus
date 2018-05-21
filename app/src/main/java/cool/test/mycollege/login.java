@@ -154,6 +154,8 @@ public class login extends AppCompatActivity implements GoogleApiClient.OnConnec
                                             progressDialog.dismiss();
                                             finish();
                                         } else {
+                                            progressDialog.dismiss();
+
                                             Toast.makeText(login.this, "      First Verify Your Email !!\n Verification sent to your mail        ", Toast.LENGTH_LONG).show();
                                         }
                                     } else {
