@@ -1,7 +1,6 @@
 package cool.test.mycollege;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.Fragment;
 
 import android.app.FragmentManager;
@@ -14,7 +13,6 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -36,13 +34,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Calendar;
 
 import cool.test.mycollege.Fragments.AttendanceFragment;
-import cool.test.mycollege.Fragments.CollegeInfo;
 import cool.test.mycollege.Fragments.LostAndFound;
-import cool.test.mycollege.Fragments.Mart;
 import cool.test.mycollege.Fragments.MartFragmentMain;
 import cool.test.mycollege.Fragments.MyProfileFragment;
-import cool.test.mycollege.Fragments.WhatToDo;
-import cool.test.mycollege.Fragments.StudyMaterial;
 import cool.test.mycollege.Fragments.TrendingFragment;
 import cool.test.mycollege.Helpers.CustomNotificationReceiver;
 
@@ -260,6 +254,8 @@ MenuItem menuItem1,menuItem2,menuItem3,blab,menuitem4;
         }
 
 
+        Intent i=new Intent(this,CollegeInfo.class);
+        startActivityForResult(i,170);
     }
 
 
@@ -432,7 +428,7 @@ if (id==R.id.cprofile){
                 Toast.makeText(this,"Coming Soon",Toast.LENGTH_SHORT).show();
 
 
-        } else if (id == R.id.ccollegeinfo) {
+        } else if (id == R.id.csuggestions) {
             /*
              menuFragment=new CollegeInfo();
              FragmentManager fragmentManager = getFragmentManager();
@@ -445,7 +441,13 @@ if (id==R.id.cprofile){
                 emailIntent.putExtra(Intent.EXTRA_TEXT, "");
                 startActivity(Intent.createChooser(emailIntent, "Send email..."));
 
-        } else if (id == R.id.cprofile) {
+        }
+            else if (id == R.id.ccollegeinfo) {
+            Intent i=new Intent(HomePage.this,CollegeInfo.class);
+            startActivity(i);
+
+
+            }else if (id == R.id.cprofile) {
 
              menuFragment = new MyProfileFragment();
              FragmentManager fragmentManager = getFragmentManager();

@@ -69,7 +69,7 @@ public class LostAndFound extends Fragment implements AdapterView.OnItemSelected
     String yoo = "General";
     FirebaseDatabase database;
     RecyclerView recyclerView;
-    String[] objects = {"General", "Mobile", "T-Shirts", "Electronics", "Study-Material"};
+    String[] objects = { "General", "Mobile", "T-Shirts", "Electronics", "Study-Material"};
     Context mctx = getContext();
     FirebaseStorage storage;
     StorageReference storageReference;

@@ -7,4 +7,5 @@
     <color name="colorAccent">#EC407A</color>
     <color name="mainText">#01579d</color>
     <color name="secondText">#616161</color>
+    <color name="app_red">#bf1111</color>
 </resources>

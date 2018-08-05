@@ -87,6 +87,14 @@
             android:name=".Myuploads"
             android:label="@string/title_activity_myuploads"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CollegeInfo"
+            android:label="INFO"
+            android:parentActivityName=".HomePage"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
+
+
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_dialog_fullscreen"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="2dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#3faab6c2"
+            >
+
+
+
+            <TextView
+                style="@style/Base.DialogWindowTitle.AppCompat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/top_text"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:text="Club Name Here" />
+
+            <ImageView
+                android:id="@+id/close_it"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="12dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:layout_centerVertical="true"
+                android:padding="4dp"
+                android:src="@drawable/ic_close_black_24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="7sp"
+                android:tint="#757575" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/card_dialog_fullscreen"
+    >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/club_image_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="200sp"
+            android:layout_marginBottom="3sp"
+            android:scaleType="fitXY"
+            android:src="@drawable/augustine"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WEB"
+            android:layout_below="@id/club_image_dialog"
+            android:id="@+id/link_button"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/large_text"
+            android:layout_below="@+id/link_button"
+            android:id="@+id/shortdesc"
+            android:layout_marginTop="5sp"/>
+
+    </RelativeLayout>
+
+
+</ScrollView>
+
+
+</RelativeLayout>

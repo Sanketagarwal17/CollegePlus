@@ -36,15 +36,21 @@
             android:icon="@drawable/yooyoo"
             android:title="Study Material" />
 
+        <item
+            android:id="@+id/ccollegeinfo"
+            android:icon="@drawable/baseline_ac_unit_24px"
+            android:title="College Info" />
+
     </group>
 
     <group  android:checkableBehavior="single"
         >
 
         <item
-            android:id="@+id/ccollegeinfo"
+            android:id="@+id/csuggestions"
             android:icon="@drawable/ic_bug_report_black"
             android:title="Suggestions" />
+
 
         <item
             android:id="@+id/cprofile"
