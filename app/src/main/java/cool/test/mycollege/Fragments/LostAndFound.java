@@ -571,7 +571,12 @@ public class LostAndFound extends Fragment implements AdapterView.OnItemSelected
         martadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showdialog();
+
+                SharedPreferences sharedPreferences=v.getContext().getSharedPreferences("logindata",Context.MODE_PRIVATE);
+                if (sharedPreferences.getString("isnormallogin","skip").equals("true"))
+                    showdialog();
+                else Toast.makeText(v.getContext(),"Login First",Toast.LENGTH_SHORT).show();
+
             }
         });
         CheckMyList();

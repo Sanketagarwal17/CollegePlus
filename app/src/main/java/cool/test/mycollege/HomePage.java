@@ -9,6 +9,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -18,6 +21,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,30 +30,39 @@ import android.view.View;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 
 import cool.test.mycollege.Fragments.AttendanceFragment;
 import cool.test.mycollege.Fragments.LostAndFound;
 import cool.test.mycollege.Fragments.MartFragmentMain;
 import cool.test.mycollege.Fragments.MyProfileFragment;
+import cool.test.mycollege.Fragments.StudyMaterial;
 import cool.test.mycollege.Fragments.TrendingFragment;
-import cool.test.mycollege.Helpers.CustomNotificationReceiver;
+import cool.test.mycollege.Fragments.WhatToDo;
 
 public class HomePage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 Intent ii;
 FirebaseDatabase database;
 MenuItem menuItem1,menuItem2,menuItem3,blab,menuitem4;
+int once=0;
+int id_01;
     Fragment menuFragment=null;
+    int started;
+    int menuhandler;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode==46||requestCode==47||requestCode==48){
@@ -105,17 +119,20 @@ MenuItem menuItem1,menuItem2,menuItem3,blab,menuitem4;
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.my_attendance_fragment, menu);
-
+        started=123;
          menuItem1 = menu.findItem(R.id.editweek);
-        menuItem1.setVisible(false);//
+        menuItem1.setVisible(true);//
         menuItem2= menu.findItem(R.id.settings);
         menuItem2.setVisible(false);
         menuItem3= menu.findItem(R.id.showattendance);
-        menuItem3.setVisible(false);
+        menuItem3.setVisible(true);
         menuitem4=menu.findItem(R.id.myuploaddd);
-        menuitem4.setVisible(true);
+        menuitem4.setVisible(false);
         blab=menu.findItem(R.id.alarm);
-        blab.setVisible(false);
+        blab.setVisible(true);
+
+
+
         super.onCreateOptionsMenu(menu);
         return true;
     }
@@ -152,16 +169,7 @@ MenuItem menuItem1,menuItem2,menuItem3,blab,menuitem4;
                         myCalendar.set(Calendar.SECOND, 1);
 
 
-                        Intent notifyIntent = new Intent(view.getContext(), CustomNotificationReceiver.class);
-                        notifyIntent.putExtra("subject", "Reminder");
-                        notifyIntent.putExtra("time", System.currentTimeMillis() + theFutureTime);
 
-                        notifyIntent.putExtra("message", "Reminder to attend this class");
-                        PendingIntent pendingIntent = PendingIntent.getBroadcast
-                                (view.getContext(), 2, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                        AlarmManager alarmManager = (AlarmManager) view.getContext().getSystemService(Context.ALARM_SERVICE);
-                        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, myCalendar.getTimeInMillis(),// this is where the time goes
-                                0, pendingIntent);
 
 
                         Toast.makeText(view.getContext(), "Class" + " due in " + String.valueOf(theFutureMinute / 60) + " hour(s) and " + String.valueOf(theFutureMinute % 60) + " minute(s)", Toast.LENGTH_SHORT).show();
@@ -183,6 +191,27 @@ MenuItem menuItem1,menuItem2,menuItem3,blab,menuitem4;
 
         AlertDialog alert11 = builder1.create();
         alert11.show();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("hio",String.valueOf(started)+"  "+String.valueOf(menuhandler));
+        if (started==123) {
+            if (menuhandler == 1) {
+
+
+                menuitem4.setVisible(false);
+
+                menuItem2.setVisible(false);
+                menuItem1.setVisible(true);
+                blab.setVisible(true);
+
+                menuItem3.setVisible(true);
+            }
+        }
+
     }
 
     @Override
@@ -224,13 +253,37 @@ MenuItem menuItem1,menuItem2,menuItem3,blab,menuitem4;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
+
+
+       /* try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "cool.test.mycollege",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+                Log.e("KeyHash:", "thisone1");
+
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e("KeyHash:", "thisone2");
+
+        } catch (NoSuchAlgorithmException e) {
+            Log.e("KeyHash:", "thisone3");
+
+        }*/
+        setSupportActionBar(toolbar);
+        menuhandler=1;
         SharedPreferences prefs = getSharedPreferences("logindata", Context.MODE_PRIVATE);
 
 
+            if (once==0){
+                    MobileAds.initialize(this, "ca-app-pub-9534694647722812~4161321035");
+                    once=1;
 
-
+            }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -242,20 +295,37 @@ MenuItem menuItem1,menuItem2,menuItem3,blab,menuitem4;
 
         Fragment menuFragment;
         menuFragment = new MyProfileFragment();
+
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.main_fragment, menuFragment)
                 .commit();
+
+
+
+
+
+
         checkforpun();
-        if (!prefs.getBoolean("islogin",false))
-        {
+        if (prefs.getString("isnormallogin","").equals("true")||prefs.getString("isnormallogin","").equals("skip"))
+        {}
+        else {
             Intent i=new Intent(this,login.class);
             startActivityForResult(i,10);
         }
 
 
-        Intent i=new Intent(this,CollegeInfo.class);
-        startActivityForResult(i,170);
+
+
+        menuFragment = new AttendanceFragment();
+
+        fragmentManager.beginTransaction()
+                .replace(R.id.main_fragment, menuFragment)
+                .commit();
+//
+
+        onNavigationItemSelected(null);
+
     }
 
 
@@ -339,8 +409,43 @@ MenuItem menuItem1,menuItem2,menuItem3,blab,menuitem4;
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        } else if (menuhandler!=1){
+            menuhandler=1;
+            menuFragment = new AttendanceFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_fragment, menuFragment)
+                    .commit();
+
+        }
+        else {
+
+
+             final AlertDialog.Builder buildd = new AlertDialog.Builder(HomePage.this);
+
+            buildd.setMessage("Do You Want To Exit");
+            buildd.setTitle("College +");
+            buildd.setCancelable(true);
+            buildd.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                    System.exit(0);
+                }
+            }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            AlertDialog fgi=buildd.create();
+            fgi.show();
+
+
+
+
+
+
         }
     }
 
@@ -348,9 +453,16 @@ MenuItem menuItem1,menuItem2,menuItem3,blab,menuitem4;
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        int id;
+        if (item==null)
+            id=R.id.cattendancemanager;
+        else
+        id = item.getItemId();
+        id_01=id;
 if (id==R.id.cprofile){
+    menuhandler=0;
             menuitem4.setVisible(true);
             menuItem2.setVisible(false);
             blab.setVisible(false);
@@ -360,14 +472,16 @@ if (id==R.id.cprofile){
         }
 
         else if (id == R.id.cattendancemanager){
-    menuitem4.setVisible(false);
+    if (item==null){}
+    else {
+        menuitem4.setVisible(false);
 
-    menuItem2.setVisible(true);
-            menuItem1.setVisible(true);
-            blab.setVisible(true);
+        menuItem2.setVisible(false);
+        menuItem1.setVisible(true);
+        blab.setVisible(true);
 
-            menuItem3.setVisible(true);
-        }else {
+        menuItem3.setVisible(true);
+    }}else {
             menuitem4.setVisible(false);
             menuItem2.setVisible(false);
             blab.setVisible(false);
@@ -377,7 +491,9 @@ if (id==R.id.cprofile){
         }
 
             if (id == R.id.ctrending) {
-             menuFragment = new TrendingFragment();
+                menuhandler=0;
+
+                menuFragment = new TrendingFragment();
              FragmentManager fragmentManager = getFragmentManager();
              fragmentManager.beginTransaction()
                      .replace(R.id.main_fragment, menuFragment)
@@ -386,6 +502,7 @@ if (id==R.id.cprofile){
 
 
         } else if (id == R.id.cattendancemanager) {
+            menuhandler=1;
              menuFragment = new AttendanceFragment();
              FragmentManager fragmentManager = getFragmentManager();
              fragmentManager.beginTransaction()
@@ -396,39 +513,43 @@ if (id==R.id.cprofile){
 
 
         } else if (id == R.id.cstudymaterial) {
-            Toast.makeText(this,"Coming Soon",Toast.LENGTH_LONG).show();
-/*
-             menuFragment=new StudyMaterial();
+                menuhandler=0;
+
+
+                menuFragment=new StudyMaterial();
              FragmentManager fragmentManager = getFragmentManager();
              fragmentManager.beginTransaction()
                      .replace(R.id.main_fragment, menuFragment)
-                     .commit();*/
+                     .commit();
 
         } else if (id == R.id.cmart) {
-             menuFragment=new MartFragmentMain();
+                menuhandler=0;
+
+                menuFragment=new MartFragmentMain();
              FragmentManager fragmentManager = getFragmentManager();
              fragmentManager.beginTransaction()
                      .replace(R.id.main_fragment, menuFragment)
                      .commit();
 
         } else if (id == R.id.clostandfound) {
+                menuhandler=0;
 
              menuFragment=new LostAndFound();
              FragmentManager fragmentManager = getFragmentManager();
              fragmentManager.beginTransaction()
                      .replace(R.id.main_fragment, menuFragment)
                      .commit();
-        } else if (id == R.id.cwhattodo) {
-/*
+        } /*else if (id == R.id.cwhattodo) {
+                menuhandler=0;
+
              menuFragment=new WhatToDo();
              FragmentManager fragmentManager = getFragmentManager();
              fragmentManager.beginTransaction()
                      .replace(R.id.main_fragment, menuFragment)
-                     .commit();*/
-                Toast.makeText(this,"Coming Soon",Toast.LENGTH_SHORT).show();
+                     .commit();
 
 
-        } else if (id == R.id.csuggestions) {
+        }*/ else if (id == R.id.csuggestions) {
             /*
              menuFragment=new CollegeInfo();
              FragmentManager fragmentManager = getFragmentManager();
@@ -448,8 +569,10 @@ if (id==R.id.cprofile){
 
 
             }else if (id == R.id.cprofile) {
+                menuhandler=0;
 
-             menuFragment = new MyProfileFragment();
+
+                menuFragment = new MyProfileFragment();
              FragmentManager fragmentManager = getFragmentManager();
              fragmentManager.beginTransaction()
                      .replace(R.id.main_fragment, menuFragment)

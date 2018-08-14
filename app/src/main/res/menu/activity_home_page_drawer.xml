@@ -6,15 +6,15 @@
 
 
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/cattendancemanager"
+            android:icon="@drawable/ic_chrome_reader_mode_black_24dp"
+            android:title="Attendance Manager" />
         <item
             android:id="@+id/ctrending"
             android:icon="@drawable/ic_trending_up_black_24dp"
             android:title="Trending" />
-        <item
-            android:id="@+id/cattendancemanager"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Attendance Manager" />
 
         <item
             android:id="@+id/cmart"
@@ -27,10 +27,10 @@
             android:icon="@drawable/ic_timeline_black_24dp"
             android:title="Lost And Found" />
 
-        <item
+      <!--  <item
             android:id="@+id/cwhattodo"
             android:icon="@drawable/cool"
-            android:title="What To Do?" />
+            android:title="What To Do?" />  -->
         <item
             android:id="@+id/cstudymaterial"
             android:icon="@drawable/yooyoo"
@@ -43,7 +43,7 @@
 
     </group>
 
-    <group  android:checkableBehavior="single"
+    <group  android:checkableBehavior="none"
         >
 
         <item

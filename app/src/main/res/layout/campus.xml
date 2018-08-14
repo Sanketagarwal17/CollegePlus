@@ -61,6 +61,9 @@
         android:scrollbarSize="30sp"
         android:layout_height="wrap_content"
         android:id="@+id/spinner_change_building"
+        android:layout_marginLeft="10sp"
+
+
         />
 
 
@@ -70,8 +73,11 @@
             android:id="@+id/campustext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/large_text"
-            android:textSize="15sp"
+            android:text="@string/lower"
+            android:gravity="center"
+            android:layout_margin="25sp"
+            android:textSize="22sp"
+            android:textColor="#000"
 
             />
 </LinearLayout>

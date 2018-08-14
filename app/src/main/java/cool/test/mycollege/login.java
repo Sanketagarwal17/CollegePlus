@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,7 +62,7 @@ public class login extends AppCompatActivity implements GoogleApiClient.OnConnec
     CallbackManager mCallbackManager;
     TextView forgot;
 
-
+    ImageView skip;
     GoogleSignInOptions options;
 
 
@@ -82,6 +83,34 @@ public class login extends AppCompatActivity implements GoogleApiClient.OnConnec
         progressDialog.setCancelable(false);
 
 
+        skip=findViewById(R.id.skip_image);
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                SharedPreferences prefs = getSharedPreferences("logindata", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("ID", null);
+                editor.putString("UID", null);
+                editor.putString("isnormallogin", "skip");
+                editor.putInt("PUN", 0);
+                editor.commit();
+                finish();
+
+
+
+
+
+
+
+
+
+
+
+            }
+        });
         forgot=findViewById(R.id.forgot);
         forgot.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -257,7 +286,7 @@ public class login extends AppCompatActivity implements GoogleApiClient.OnConnec
                             editor.putString("name",user.getDisplayName());
                             editor.putInt("PUN",0);
                             editor.putBoolean("islogin",true);
-                            editor.putString("isnormallogin","false");
+                            editor.putString("isnormallogin","true");
                             editor.commit();
                             progressDialog.dismiss();
                             finish();
@@ -330,7 +359,7 @@ public class login extends AppCompatActivity implements GoogleApiClient.OnConnec
                             editor.putString("UID",user.getUid());
                             editor.putString("name",account.getDisplayName());
                             editor.putInt("PUN",0);
-                            editor.putString("isnormallogin","false");
+                            editor.putString("isnormallogin","true");
                             //Boolean b=task.getResult().getAdditionalUserInfo().;
 
 

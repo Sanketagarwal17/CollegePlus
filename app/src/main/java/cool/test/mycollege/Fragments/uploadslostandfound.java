@@ -179,7 +179,6 @@ public class uploadslostandfound extends Fragment{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (firebaseRecyclerAdapter.getItemCount()==0){
-                    Toast.makeText(getContext(),"No items Uploaded in your Lost and found",Toast.LENGTH_SHORT).show();
                     dfdfd.setVisibility(View.INVISIBLE);
 
                 }

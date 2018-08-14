@@ -6,10 +6,10 @@ package cool.test.mycollege.MyDataTypes;
 
 public class club_datatype {
 
-    String club_name,link,desc;
-    int image_id;
+    String club_name,link;
+    int image_id,desc;
 
-    public club_datatype(String club_name, String link, String desc, int image_id) {
+    public club_datatype(String club_name, String link, int desc, int image_id) {
         this.club_name = club_name;
         this.link = link;
         this.desc = desc;
@@ -32,11 +32,11 @@ public class club_datatype {
         this.link = link;
     }
 
-    public String getDesc() {
+    public int getDesc() {
         return desc;
     }
 
-    public void setDesc(String desc) {
+    public void setDesc(int desc) {
         this.desc = desc;
     }
 

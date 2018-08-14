@@ -17,17 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
             android:name=".EditAttendanceinWeek"
             android:label="@string/title_activity_attendance"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".AttendanceSettingsActivity"
             android:label="@string/attendance_settings"
@@ -42,23 +34,6 @@
                 android:value=".EditAttendanceinWeek" />
         </activity>
 
-        <receiver
-            android:name=".Helpers.MyReceiver"
-            android:enabled="true"
-            android:exported="false"></receiver>
-
-        <service
-            android:name=".Helpers.MyNewIntentService"
-            android:exported="false"></service>
-
-        <receiver
-            android:name=".Helpers.CustomNotificationReceiver"
-            android:enabled="true"
-            android:exported="false"></receiver>
-
-        <service
-            android:name=".Helpers.MyNewCustomIntent"
-            android:exported="false"></service>
 
         <activity
             android:name=".HomePage"
@@ -91,17 +66,15 @@
             android:name=".CollegeInfo"
             android:label="INFO"
             android:parentActivityName=".HomePage"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
-
-
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
         <activity android:name=".StudyMaterialOnline" />
-        <activity android:name=".Devs"></activity>
+        <activity android:name=".Devs" />
+        <activity android:name=".loopout"></activity>
     </application>
 
 </manifest>

@@ -177,23 +177,256 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="heritage">
-        "Heritage building is coolest "
 
-                "\nOnce the input event is completed or cancelled, the component will return to its resting "
-        "elevation."
-        "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAvoiding elevation interference."
-        "\n\nComponents with responsive elevations may encounter other components as they move between "
-        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
-        "through other material, components avoid interfering with one another any number of ways, "
-        "whether on a per component basis or using the entire app layout."
-        "\nOn a component level, components can move or be removed before they cause interference. "
-        "For example, a floating action button (FAB) can disappear or move off screen before a "
-        "user picks up a card, or it can move if a snackbar appears."
-        "\nOn the layout level, design your app layout to minimize opportunities for interference. "
-        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
-        "when a user tries to pick up one of cards.\n\n"
+
+
+    <string name="roboism">
+"what to be a robo-freak but don't know how?roboISM is the place for you.here robotics is not a task it is a passion.it serves as the robotics club of IIT(ISM),dhanbad and organises workshops on building manual and automated robots and conducts various robotics competitions. "
+</string>
+
+
+    <string name="cyberlab">
+"so you are a 'Geek' having a glowing blaze of code?find your perfect spot in Cyber Labs Here the geekiest of the people get together,learn and create cool mobile web and deskstop applications out of a laptop and a brain. they also make things smart(lot),hack these stuff or just teach them all to a machine."
+</string>
+
+
+    <string name="fotofreaks">
+"Fotofreaks is the official photography club of IIT ISM Dhanbad. it is a place where capturing picture is a religion. this club is responsible for capture all the prominent moments of the collage. it conducts photo-walks,exhibitions,and other events in collaboration with other clubs."
+</string>
+
+
+    <string name="toastmaster">
+"Mic.Drop Toastmasters club is a branch of Toastmasters international.an international non-profit organization that operates worldwide.No matter whether you are good or bad at public speaking. this is the place for you to improve your soft skills.it focuses on developing pubilc speaking and leadership skills.The club believes your idea is just a thought until you know how to express it."
+</string>
+
+
+    <string name="quiziappa">
+"Unleash the inner quizzer inside you with the quizzing club Quiziappa.Quiziappa has broad volunteer base comprising many individuals who have mastered the art of quizzing. it provides excellent opportunity to nature your passion for quizzing "
+</string>
+
+
+    <string name="litm">
+"Got some cool moves?wanna hit and rock the dance floor? LITM ,the official dance club of IIT(ISM) is the right place for you.it is the place where dance is the place where dance is passion  and passion is life. it works on the principale of "learn, teach,and perform ". "
+</string>
+
+
+    <string name="adc">
+""Enjoy life now,this is not a rehearsal" if there is an actor hidden inside you then the stage of Abhay Dramatics club calls for you A Place  where you can hone your skills under the shade of some veterans Because all drama must remain on stage."
+</string>
+
+
+    <string name="litc">
+"Dear reader,if you think you are betrothed to creativity then LITC can be your garden have some great ideas?
+        write it. shoot it. pulish it. blog it.joke it Debate it. Recite it. Crochet it. saute it... "
+</string>
+<string name="mailer">
+    "Its news till its NEW
+    2004 was the year when Mailer Daemon came into action.
+    Since then it has always kept it's aim high.
+    this club give daily updates of what is happening in the college to help you being aware of your surroundings Also,
+    initiatives to bring any positive change in the campus are being taken.
+    We have always make your voice reach the authority We are everywhere around. Be it campus or online We are Always there to help
+    "
+</string>
+    <string name="chayanika">
+
+        "साहित्य की कोई भाषा नहीं होती, साहित्य की जुबां भी होती है भावनाओं की
+परिकल्पना की, संवेदना की, चंद शब्दों में कहें तो आपके सुनहरे विचारों की अभिव्यक्ति ।
+कि यदि आप साहित्य के अनुरागी हैं और किसी भी भारतीय मूल राज्य भाषा में लिखते हैं,
+पढ़ते हैं या महज सुनना पसंद करते हैं, तो चयनिका संघ आपको सादर आमंत्रित करता है।
+इस परिवार का हिस्सा बनने के लिए।"
     </string>
+
+
+    <string name="ecell">
+        "E-Cell of IIT (ISM), Dhanbad aims at manifesting the latent
+entrepreneurial spirit of the young Students. This club helps you
+improve your communication and managerial skills E-cell is
+perfect place to start, to start up and to start up big" Those people
+with ideas, Cell tries it's best to provide them with all necessary
+resources"
+    </string>
+<string name="artfreaks">
+
+    "Art freaks is a creative club of IIT (ISM), Dhanbad. It provides
+platform to the students to exhibit their hidden talentsin the world,
+of art and craft. This club justifies the saying "every chuid is an artist,
+aives an opportunity to the students to let their imagination run will
+and provides them with the sight to see things and depict them
+beautifully"
+</string>
+
+    <string name="udaan">
+        "As the career cell of our institute, Udaan serves to spread awareness
+in the student fraternity about the diverse career options available
+after graduation. It holds various seminars around the year with
+alumni and prominent current students stepping in as speakers to
+guide students towards the realisation of their goals."
+    </string>
+
+    <string name="manthan">
+        "Where words fall, music speaks Il music is your rellgion, then Manthan is going to be your holy shrine. The officíal musie club of InT SM will nurture you until you are ready to pluck some professional strings"
+    </string>
+<string name="mechismu">
+    "Do you have zeal in creating and designing automobiles? Mechanism
+is the best place for you to show your talent. It is the leading
+innovative and rising club of IT (AS). It is working on adopting the
+latest technology in the field of Automobiles. It got its benchmark
+recognition in All India Racing and Design competition, namely, in
+Supra SAE 2011 where it bagged the first prize in the autocross
+event."
+</string>
+
+    <string name="lci">
+        "LCI is the official Filmography club of IT (ISM), Dhanbad it is the
+place where people unleash their creativity and create quality and
+artistic films. It is where one can satisfy his inner fever of acting and
+passion of filming. Irrespective of genre, they create everything from
+music videos to stories, from social experiments to college functions."
+    </string>
+    <string name="arka">
+        "Astronomy is fun, especially when you explore it with others too At
+"ARKA" Astronomy Club of IIT (ISM) Dhanbad, people believe in
+unlocking the mysteries of the night sky and quenching their inner
+thirst of those mysteries, by holding sessions. Started in 2017, it is one
+of the newest clubs of IT ISM."
+    </string>
+
+    <string name="kartavya">
+        "Kartawa is a non-profit voluntary organization run by IT ISM
+students. It is an NGO with the aim of educating poverty-stricken
+and slum-dwelling students to lead a decent life with a motive of
+eradicating the illiteracy" from the society Since its inception,
+Kartavya has increased to 11 Chapters across India. Kartavya is
+providing Education to boo children across the country along with
+employment to 100 people through recruitment."
+    </string>
+    <string name="ffi">
+        "FEI (Fast Forward India) is a unique effort and an initiative taken by
+the students of IT ISM to bring awareness and work for the
+upliftment of the downtrodden It provides a platform for the
+underprivileged to learn and develop skills which will help in their
+contribution to the society and shall simultaneously raise their
+standards of living as well. FFIS divided into four chapters viz
+Escape Disha, Jagriti &amp; Bloodline.
+
+
+
+
+Bloodline:
+Bloodline was started in 2007, sighting the lack of awareness
+among people in this part of the country, regarding the
+importance of blood donation, with a vision that no one shall
+die in Dhanbad for the want of Blood.
+
+Disha:
+Disha plays the role of career-counselling branch of FF1, that
+helps underprivileged student to explore career opportunities
+after their matriculation and higher senior secondary exams,
+
+Escape
+Through Escape, FFI intends to hone communication skills
+and interpersonal development of the underprivileged
+students in order to instil within them, enhanced speaking
+skills along with a pleasing personality
+
+Jagriti:
+Jagriti was started with a vision to empower underprivileged
+students with computer education so that they can stand on
+their own feet and fetch jobs like that of computer operators
+and other related professions"
+    </string>
+    <string name="aisec">
+        "AIESEC is the world's largest non-profit organisation. It air
+to develop youth leadership by facilitating social
+development and providing professional internships
+Through AIESEC, several employers and welfare
+organisations get an opportunity to connect with a global
+network of talent."
+    </string>
+    <string name="samitra">
+        "Samitra is a volunteer-run organization mainly working
+towards fulfilling the needs of people living in slums and
+villages and supporting their families.
+Its projects include
+1. Annapurna: Provides food to the needy with the
+slogan “help us
+feed those in need".
+2. Parivesh: Distributes for charity and cleanliness drive."
+    </string>
+    <string name="wethecrew">
+
+        "Street is a freestyle dance, which incorporates other styles such as Hip Hop,
+        This is the perfect club for you to be one of the cool dancers.
+        Breakdance and House; Street Dance Classes will introduce you to these core street styles,
+        put them into practice with exciting choreography, and help you learn to improvise with confidence."
+    </string>
+
+    <string name="heritage">
+     "Institute has a sprawling campus with the Heritage building,
+        The Diamond Hostel, Central Workshop &amp; Penman Auditorium among the structures of historical importance. The Heritage Building houses one of the richest geological museum of Asia with wide variety of stones and fossils preserved. It even has a seismological observatory.
+you can not experience the scale of work done here and its beauty unless you visit it. The Heritage building is designed in the manner of a periodic table and boasts of a geological museum within it."
+    </string>
+    <string name="academic">
+        " Its one of the major attraction of our college,
+        this building is maze in itself.
+        Many departments like civil, AGL, AGP are established in academic complex and once in a while you will be visiting over here for laboratory experiments and visiting professor for extra marks XD."
+    </string>
+    <string name="admin">
+        "It’s the brain of our college,
+        all the major decisions are taken in this section,
+        also the problems in fee submission,
+        wrong details on MIS,
+        scholarship issues are solved over here.
+        Basically all the administrative issues should be reported and resolved over here.
+        Also there is special help line window available in order to assist and clear doubts of students."
+    </string>
+
+    <string name="central">
+        "The Central Library of Indian Institute of Technology (Indian School of Mines) Dhanbad is the heart of the institute providing direct academic and research supports to all departments.
+The vision of the Central Library of IIT(ISM) is to become the hub of all academic and creative life of the institution. It promises to provide high quality and innovative services to its users by excelling in collecting, preserving and providing access to the best scholarly and educational resources to foster the growth of intellectual professionals, who shall employ it for the welfare of the society."
+    </string>
+    <string name="sac">
+        "The accent of student life and activities on the campus is to provide an invigorating and creative environment which promotes independent thinking and introspection and leads the young students to become more aware of the consequence of their own actions. This allows them to weave a pattern of life which equips them to stand up to the many pressures of community living, to train them in the making of inferences in everyday situations, to help them derive more insight into their personal relationships and to arouse in them a sensibility of aesthetic experience.
+Excellent facilities for the residence to a large number of students, co-curricular activities, sports and games, recreation, shopping, etc. have been provided to the students on campus. Special efforts are made to promote student-teacher interaction. Counselling Service has been set up to assist students in their initial adjustment, as well as in any difficulties, they may have during their stay at the Institute."
+    </string>
+    <string name="nlhc">
+        "Probably the heart of any educational institute lies its its's lecture halls.
+        Here's the New Lecture Hall Complex where the crux of this IIT's techincal knowledge is disseminated.
+        This building can be a adorable site when you gather knowledge but can also be the scary one when exams are conducted
+        this four storeyed building will be your fun abode for your upcomming college life"
+    </string>
+    <string name="sports">
+        "Tired racking your brain ,Time to get Sporty,
+        rejuvenate your sweat glands on the field Because you have to Dunk Your spirit in Basketball,
+        Swing your arms to smash the ball in Tennis,
+        or be the the shining sportsmen of your team in volleyball"
+    </string>
+    <string name="lower">
+        "in the widespread area stretch an arm run around revive the sportsmen in you here.
+        games such as football await you here
+        see your strength in Shotput , discus and javelin throws
+        or just come here to experience the fresh air"
+    </string>
+    <string name="upper">
+        "Here you challenge the sportsmen in you play cricket and join hands with other energised players
+        no age no boundries all that defines you are your skills
+        so step out of our comfort zones and exert yourselves"
+    </string>
+    <string name="gjlt">
+        "Seminars and ceremonies all go hand in hand at this luxurious theatre.
+        an event should have a glorious start and what better than this beautiful piece of architecture to hold the same
+        the events that are conducted here are the badges of our pride down the cultural lane"
+    </string>
+    <string name="olhc">
+        "Old Lecture Hall Complex
+        or Open Air Theatre
+        mainly the hub of cool mini events of clubs
+        and a place where knowledge is imparted and a place that proudly presents the art and skills of its students.
+        with all cool events nights and morning lectures this place is unbeatable"
+    </string>
+
+
 
 
 

@@ -87,7 +87,7 @@ public class EditAttendanceinWeek extends AppCompatActivity {
             startActivity(attendanceIntent);
             return true;
         }  else if (id == android.R.id.home) {
-            NavUtils.navigateUpFromSameTask(this);
+         //   NavUtils.navigateUpFromSameTask(this);
         }
 
         return super.onOptionsItemSelected(item);

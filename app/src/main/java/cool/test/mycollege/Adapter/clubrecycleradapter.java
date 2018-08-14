@@ -63,7 +63,8 @@ public class clubrecycleradapter extends RecyclerView.Adapter<clubrecycleradapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.t.setText(local.get(position).getClub_name());
-        holder.imageView.setImageResource(local.get(position).getImage_id());
+        //holder.imageView.setImageResource(local.get(position).getImage_id());
+        Glide.with(localparent).load(local.get(position).getImage_id()).into(holder.imageView);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +116,13 @@ public class clubrecycleradapter extends RecyclerView.Adapter<clubrecycleradapte
         return local.size();
     }
 
+    public void filterit(ArrayList<club_datatype> search_data){
 
+        local =search_data;
+        notifyDataSetChanged();
+
+
+    }
 
 
 }

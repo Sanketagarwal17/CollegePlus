@@ -185,7 +185,6 @@ public class uploadsmyoldmart extends Fragment{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (firebaseRecyclerAdapter.getItemCount()==0){
-                    Toast.makeText(getContext(),"No items Uploaded in your old mart",Toast.LENGTH_SHORT).show();
                     vbg.setVisibility(View.INVISIBLE);
 
                 }

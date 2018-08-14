@@ -86,16 +86,17 @@
 
 
             </LinearLayout>
-            <ImageView
-                android:id="@+id/floatti"
-                android:layout_width="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:src="@drawable/ic_more_vert_black_24dp" />
+
 
 
         </RelativeLayout>
+        <ImageView
+            android:id="@+id/floatti"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+
+            />
     </android.support.v7.widget.CardView>
 
 </android.support.constraint.ConstraintLayout>

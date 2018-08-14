@@ -15,14 +15,16 @@
         android:layout_margin="5dp"
         android:layout_marginTop="30dp"
         app:cardElevation="10dp"
-        app:cardBackgroundColor="#3949ab"
+        app:cardBackgroundColor= "#f82e75ec"
+
         app:cardCornerRadius="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/day_layout">
 
             <ImageView
                 android:layout_width="7sp"

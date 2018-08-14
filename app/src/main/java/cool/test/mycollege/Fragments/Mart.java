@@ -584,7 +584,11 @@ public class Mart extends Fragment implements AdapterView.OnItemSelectedListener
         martadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                SharedPreferences sharedPreferences=v.getContext().getSharedPreferences("logindata",Context.MODE_PRIVATE);
+                if (sharedPreferences.getString("isnormallogin","skip").equals("true"))
                 showdialog();
+                else Toast.makeText(v.getContext(),"Login First",Toast.LENGTH_SHORT).show();
             }
         });
         CheckMyList();

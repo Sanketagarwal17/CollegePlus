@@ -436,27 +436,46 @@ public class oldMart extends Fragment implements AdapterView.OnItemSelectedListe
                 report.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (f!=-1) {
-                            SharedPreferences prefs = a.getSharedPreferences("logindata", Context.MODE_PRIVATE);
-                            String UID = prefs.getString("UID", "Random");
-                            FirebaseDatabase reportcheck = FirebaseDatabase.getInstance();
-                            DatabaseReference cable;
+
+                        SharedPreferences prefs=v.getContext().getSharedPreferences("logindata",Context.MODE_PRIVATE);
+
+                        if (prefs.getString("isnormallogin","").equals("true")){
+
+                            if (f!=-1) {
+                                String UID = prefs.getString("UID", "Random");
+                                FirebaseDatabase reportcheck = FirebaseDatabase.getInstance();
+                                DatabaseReference cable;
 
 
-                            DatabaseReference report = reportcheck.getReference("OldMart/" + ss);
-                            report.child("report").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    Toast.makeText(a.getApplicationContext(),"Reported",Toast.LENGTH_SHORT).show();
+                                DatabaseReference report = reportcheck.getReference("OldMart/" + ss);
+                                report.child("report").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Toast.makeText(a.getApplicationContext(),"Reported",Toast.LENGTH_SHORT).show();
 
-                                }
-                            });
+                                    }
+                                });
+
+
+                            }
+                            else {
+                                Toast.makeText(a.getApplicationContext(),"Product already verified by Admin",Toast.LENGTH_SHORT).show();
+                            }
 
 
                         }
-                        else {
-                            Toast.makeText(a.getApplicationContext(),"Product already verified by Admin",Toast.LENGTH_SHORT).show();
-                        }
+
+                        else
+                            Toast.makeText(v.getContext(),"Login First",Toast.LENGTH_SHORT);
+
+
+
+
+
+
+
+
+
 
 
                     }
@@ -552,7 +571,7 @@ public class oldMart extends Fragment implements AdapterView.OnItemSelectedListe
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_old_mart, container, false);
-
+        final SharedPreferences prefs=v.getContext().getSharedPreferences("logindata",Context.MODE_PRIVATE);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         database = FirebaseDatabase.getInstance();
@@ -565,7 +584,10 @@ public class oldMart extends Fragment implements AdapterView.OnItemSelectedListe
         martadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (prefs.getString("isnormallogin","").equals("true"))
                 showdialog();
+                else
+                    Toast.makeText(v.getContext(),"Login First",Toast.LENGTH_SHORT).show();
             }
         });
         CheckMyList();

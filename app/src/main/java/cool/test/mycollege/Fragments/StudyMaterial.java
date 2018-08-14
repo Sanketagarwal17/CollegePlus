@@ -25,6 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -43,6 +46,7 @@ public class StudyMaterial extends Fragment implements AdapterView.OnItemSelecte
     String[] objects={"1st YEAR","2nd YEAR (3rd Sem)","2nd YEAR (4th Sem)","3rd YEAR (5th Sem)","3rd YEAR (6th Sem)","4th YEAR (7th Sem)","4th YEAR (8th Sem)"};
     ArrayList<String> arrayList;
     Bundle bla=new Bundle();
+    AdView mAdView;
     int year=0,branch=0;
     @Nullable
     @Override
@@ -65,7 +69,13 @@ public class StudyMaterial extends Fragment implements AdapterView.OnItemSelecte
         arrayList.add(0,"Hard Sem");
         arrayList.add(1,"Easy Sem");
 
+/*        AdView adView = new AdView(v.getContext());
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-9534694647722812/9002584171");*/
 
+        mAdView = v.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         studyspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -79,15 +89,14 @@ public class StudyMaterial extends Fragment implements AdapterView.OnItemSelecte
 
                 if(position==0)
                 {
-                   /* arrayList=new ArrayList<>();
+                   arrayList=new ArrayList<>();
                     arrayList.add(0,"Hard Sem");
-                    arrayList.add(1,"Easy Sem");*/
+                    arrayList.add(1,"Easy Sem");
 
                 }
                     else {
 
-                    Toast.makeText(getContext(),"Coming Soon",Toast.LENGTH_SHORT).show();
-/*
+
                     arrayList=new ArrayList<>();
                     arrayList.add(0,"CSE");
                     arrayList.add(1,"Mathematics and Computing");
@@ -107,7 +116,7 @@ public class StudyMaterial extends Fragment implements AdapterView.OnItemSelecte
                     arrayList.add(15,"Mineral Engineering");
 
 
-*/
+
                 }
 
 
@@ -139,11 +148,22 @@ public class StudyMaterial extends Fragment implements AdapterView.OnItemSelecte
 fab.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        Intent i=new Intent(getContext(),StudyMaterialOnline.class);
-        bla.putInt("year",year);
-      bla.putInt("branch",branch);
-        i.putExtras(bla);
-        startActivity(i);
+
+
+        if (year>0)
+        {
+            Toast.makeText(getContext(),"Content To be Uploaded Soon",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            /*Intent i = new Intent(getContext(), StudyMaterialOnline.class);
+            bla.putInt("year", year);
+            bla.putInt("branch", branch);
+            i.putExtras(bla);
+            startActivity(i);*/
+            Uri uri = Uri.parse("https://drive.google.com/drive/u/0/folders/0B_XYsz-weqCGWFg1VHlVTEhyM0k"); // missing 'http://' will cause crashed
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        }
     }
 });
 

@@ -16,7 +16,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#3faab6c2"
+            android:background="#63aab6c2"
             >
 
 
@@ -61,7 +61,6 @@
             android:layout_height="200sp"
             android:layout_marginBottom="3sp"
             android:scaleType="fitXY"
-            android:src="@drawable/augustine"
             />
         <Button
             android:layout_width="match_parent"
@@ -69,13 +68,27 @@
             android:text="WEB"
             android:layout_below="@id/club_image_dialog"
             android:id="@+id/link_button"/>
-        <TextView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/large_text"
             android:layout_below="@+id/link_button"
+            android:layout_margin="5sp"
+            >
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:layout_margin="10sp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:layout_width="match_parent"
+            android:textSize="19sp"
+            android:textColor="#000"
+            android:layout_height="wrap_content"
+            android:text="normal"
             android:id="@+id/shortdesc"
             android:layout_marginTop="5sp"/>
+        </ScrollView>
 
     </RelativeLayout>
 

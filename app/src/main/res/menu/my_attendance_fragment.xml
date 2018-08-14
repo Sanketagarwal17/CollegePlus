@@ -9,12 +9,12 @@
             android:title="Edit Timetable" />
         <item
             android:id="@+id/showattendance"
-            android:title="Edit Attendance" />
+            android:title="Edit Attendance and Subjects" />
 
 
     <item
         android:id="@+id/settings"
-        android:title="Edit Subjects" />
+        android:title="--Edit Subjects--" />
 
     <item
         android:id="@+id/myuploaddd"
