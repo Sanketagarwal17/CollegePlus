@@ -124,9 +124,10 @@
         android:layout_width="253dp"
         android:layout_height="62dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="-157dp"
-        android:layout_marginBottom="75dp"
+        android:layout_marginEnd="-171dp"
+        android:layout_marginBottom="84dp"
         android:layout_toStartOf="@+id/user_profile_photo"
+        android:background="@drawable/rounded_corner"
         android:text="Upload Material" />
 
 

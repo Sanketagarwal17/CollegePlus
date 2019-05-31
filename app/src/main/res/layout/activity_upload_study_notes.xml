@@ -73,8 +73,9 @@
         android:layout_height="71dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="214dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="224dp"
+        android:background="@drawable/rounded_corner"
         android:ems="10"
         android:hint="Subject Name"
         android:inputType="textPersonName" />
@@ -85,19 +86,21 @@
         android:layout_height="69dp"
         android:layout_alignStart="@+id/uploadsubjectname"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="-11dp"
-        android:layout_marginTop="288dp"
+        android:layout_marginStart="-2dp"
+        android:layout_marginTop="306dp"
+        android:background="@drawable/rounded_corner"
         android:ems="10"
         android:hint="Subject Topic"
         android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/uploadpdf"
-        android:layout_width="296dp"
-        android:layout_height="91dp"
+        android:layout_width="322dp"
+        android:layout_height="75dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginBottom="26dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/rounded_corner"
         android:text="Upload Pdf" />
 </RelativeLayout>

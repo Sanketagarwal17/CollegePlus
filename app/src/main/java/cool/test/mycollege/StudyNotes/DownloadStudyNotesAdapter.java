@@ -34,6 +34,12 @@ public class DownloadStudyNotesAdapter extends RecyclerView.Adapter<DownloadStud
 
     }
 
+    public void filterList(ArrayList<DownLoadStudyNotesModel> filterdNames) {
+        this.arrayList = filterdNames;
+        notifyDataSetChanged();
+    }
+
+
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         Log.e("Running","4");

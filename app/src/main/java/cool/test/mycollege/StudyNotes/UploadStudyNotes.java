@@ -1,6 +1,7 @@
 package cool.test.mycollege.StudyNotes;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -35,6 +37,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 
+import cool.test.mycollege.Fragments.StudyMaterial;
 import cool.test.mycollege.R;
 
 public class UploadStudyNotes extends AppCompatActivity {
@@ -166,6 +169,7 @@ StorageReference mStorageReference;
 upload.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
+
         usubjectname=psubjectname.getText().toString();
         usubjecttopic=psubjecttopic.getText().toString();
         getPDF();
@@ -217,7 +221,9 @@ upload.setOnClickListener(new View.OnClickListener() {
 
     private void uploadFile(Uri data) {
         //progressBar.setVisibility(View.VISIBLE);
-        Toast.makeText(UploadStudyNotes.this,"Enter Successfully",Toast.LENGTH_LONG).show();
+        final ProgressDialog progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("Please wiat it will take some time");
+        progressDialog.show();
 
         StorageReference sRef = mStorageReference.child(Constants.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + ".pdf");
         sRef.putFile(data)
@@ -227,9 +233,7 @@ upload.setOnClickListener(new View.OnClickListener() {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         //progressBar.setVisibility(View.GONE);
                         //textViewStatus.setText("File Uploaded Successfully");
-                        Toast.makeText(UploadStudyNotes.this,"Upload Successfully",Toast.LENGTH_LONG).show();
 
-                        Log.e("Uploading",usubjectname+usubjecttopic);
                         UploadStudyNotesModel uploadobject = new UploadStudyNotesModel(taskSnapshot.getDownloadUrl().toString(),usubjectname,usubjecttopic,ubranch,uyear);
                         //mDatabaseReference.child(mDatabaseReference.push().getKey()).setValue(uploadobject);
                         DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
@@ -239,7 +243,9 @@ upload.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()) {
-                                    Toast.makeText(UploadStudyNotes.this, "Upload Successfully  2", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(UploadStudyNotes.this, "Thank You For Uploading Materials", Toast.LENGTH_LONG).show();
+                                    progressDialog.dismiss();
+                                    startActivity(new Intent(UploadStudyNotes.this,StudyMaterial.class));
                                 }else
                                 {
                                     Toast.makeText(UploadStudyNotes.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
