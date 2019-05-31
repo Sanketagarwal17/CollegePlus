@@ -1,40 +1,28 @@
 package cool.test.mycollege.Fragments;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.ActivityNotFoundException;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.view.menu.MenuView;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
 import cool.test.mycollege.R;
-import cool.test.mycollege.StudyMaterialOnline;
+import cool.test.mycollege.StudyNotes.StudyNotes;
+import cool.test.mycollege.StudyNotes.UploadStudyNotes;
 
 /**
  * Created by Vipin soni on 20-12-2017.
@@ -48,19 +36,19 @@ public class StudyMaterial extends Fragment implements AdapterView.OnItemSelecte
     Bundle bla=new Bundle();
     AdView mAdView;
     int year=0,branch=0;
+    Button uploadmaterials;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View v=inflater.inflate(R.layout.study_material_launch,container,false);
-
-        studyspinner=v.findViewById(R.id.yearspinner);
+        studyspinner=v.findViewById(R.id.uyearspinner);
         studyspinner.setOnItemSelectedListener(this);
         ArrayAdapter aa = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,objects);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         studyspinner.setAdapter(aa);
 
-
+        uploadmaterials=v.findViewById(R.id.uploadmaterial);
         fab=v.findViewById(R.id.goooo);
         branchspinner=v.findViewById(R.id.branchspinner);
         branchspinner.setOnItemSelectedListener(this);
@@ -149,21 +137,34 @@ fab.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
 
-
-        if (year>0)
+       Intent i=new Intent(getActivity(),StudyNotes.class);
+      //  Log.e("Year",Integer.toString(year));
+        i.putExtra("Year",Integer.toString(year));
+       i.putExtra("Branch",Integer.toString(branch));
+       startActivity(i);
+       /*if (year>0)
         {
             Toast.makeText(getContext(),"Content To be Uploaded Soon",Toast.LENGTH_SHORT).show();
         }
         else {
-            /*Intent i = new Intent(getContext(), StudyMaterialOnline.class);
-            bla.putInt("year", year);
-            bla.putInt("branch", branch);
-            i.putExtras(bla);
-            startActivity(i);*/
+            //Intent i = new Intent(getContext(), StudyMaterialOnline.class);
+            //bla.putInt("year", year);
+            //bla.putInt("branch", branch);
+            //i.putExtras(bla);
+            //startActivity(i);
             Uri uri = Uri.parse("https://drive.google.com/drive/u/0/folders/0B_XYsz-weqCGWFg1VHlVTEhyM0k"); // missing 'http://' will cause crashed
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
-        }
+        }*/
+    }
+});
+
+
+uploadmaterials.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Intent i=new Intent(getActivity(),UploadStudyNotes.class);
+        startActivity(i);
     }
 });
 

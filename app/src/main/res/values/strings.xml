@@ -179,7 +179,6 @@
     </string>
 
 
-
     <string name="roboism">
 "what to be a robo-freak but don't know how?roboISM is the place for you.here robotics is not a task it is a passion.it serves as the robotics club of IIT(ISM),dhanbad and organises workshops on building manual and automated robots and conducts various robotics competitions. "
 </string>
@@ -219,7 +218,7 @@
 "Dear reader,if you think you are betrothed to creativity then LITC can be your garden have some great ideas?
         write it. shoot it. pulish it. blog it.joke it Debate it. Recite it. Crochet it. saute it... "
 </string>
-<string name="mailer">
+    <string name="mailer">
     "Its news till its NEW
     2004 was the year when Mailer Daemon came into action.
     Since then it has always kept it's aim high.
@@ -246,7 +245,7 @@ perfect place to start, to start up and to start up big" Those people
 with ideas, Cell tries it's best to provide them with all necessary
 resources"
     </string>
-<string name="artfreaks">
+    <string name="artfreaks">
 
     "Art freaks is a creative club of IIT (ISM), Dhanbad. It provides
 platform to the students to exhibit their hidden talentsin the world,
@@ -267,7 +266,7 @@ guide students towards the realisation of their goals."
     <string name="manthan">
         "Where words fall, music speaks Il music is your rellgion, then Manthan is going to be your holy shrine. The officíal musie club of InT SM will nurture you until you are ready to pluck some professional strings"
     </string>
-<string name="mechismu">
+    <string name="mechismu">
     "Do you have zeal in creating and designing automobiles? Mechanism
 is the best place for you to show your talent. It is the leading
 innovative and rising club of IT (AS). It is working on adopting the
@@ -425,12 +424,6 @@ Excellent facilities for the residence to a large number of students, co-curricu
         and a place where knowledge is imparted and a place that proudly presents the art and skills of its students.
         with all cool events nights and morning lectures this place is unbeatable"
     </string>
-
-
-
-
-
-
 
 
 </resources>

@@ -10,7 +10,7 @@
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/yearspinner"
+        android:id="@+id/uyearspinner"
         android:padding="20sp"
         android:layout_margin="20sp"
 
@@ -24,7 +24,7 @@
         android:id="@+id/branchspinner"
         android:padding="20sp"
         android:layout_margin="20sp"
-        android:layout_below="@+id/yearspinner"
+        android:layout_below="@+id/uyearspinner"
         >
 
 

@@ -88,8 +88,6 @@ public class login extends AppCompatActivity implements GoogleApiClient.OnConnec
             @Override
             public void onClick(View v) {
 
-
-
                 SharedPreferences prefs = getSharedPreferences("logindata", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("ID", null);
@@ -98,17 +96,6 @@ public class login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 editor.putInt("PUN", 0);
                 editor.commit();
                 finish();
-
-
-
-
-
-
-
-
-
-
-
             }
         });
         forgot=findViewById(R.id.forgot);

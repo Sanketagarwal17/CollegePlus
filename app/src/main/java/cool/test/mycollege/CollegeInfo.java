@@ -71,10 +71,6 @@ public class CollegeInfo extends AppCompatActivity {
 
                    fragment=new clubs();
                     break;
-
-
-
-
             }
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
