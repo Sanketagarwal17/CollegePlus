@@ -76,9 +76,10 @@ public class TrendingFragment extends Fragment {
                         viewholder.geta(getActivity());
                         viewholder.givemodel(model);
                         viewholder.setTitle(model.getProductname());
+
                         // viewholder.setPrice(model.getPrice());
                         // viewholder.setDesc(model.getProductdesc());
-                        viewholder.setlistener(model.getPicurl().equals("NULL"));
+                       viewholder.setlistener(model.getPicurl().equals("NULL"));
                         if (model.getPicurl().equals("NULL")) {
                             viewholder.setImage2();
                         } else {
@@ -176,7 +177,7 @@ public class TrendingFragment extends Fragment {
             StorageReference storageRef = FirebaseStorage.getInstance().getReference();
 
 // Create a reference with an initial file path and name
-         //   StorageReference pathReference = storageRef.child("image/latestproject.jpg");
+           StorageReference pathReference = storageRef.child("Trending");
             //Picasso.with(c).load(imagelink).into(iiii);
             Glide
                     .with(c)

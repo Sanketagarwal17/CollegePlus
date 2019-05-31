@@ -113,13 +113,6 @@ public class LostAndFound extends Fragment implements AdapterView.OnItemSelected
     }
 
 
-
-
-
-
-
-
-
     /*public String compressImage(Bitmap n) {
 
         String filePath = getRealPathFromURI(imageUri);
@@ -236,7 +229,6 @@ public class LostAndFound extends Fragment implements AdapterView.OnItemSelected
 
 
     private void upload(final int vvv) {
-
 
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("Image Uploading...");
