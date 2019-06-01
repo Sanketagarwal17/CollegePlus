@@ -7,6 +7,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.List;
 
 import cool.test.mycollege.R;
+import cool.test.mycollege.Trending.TrendingActivity;
 
 /**
  * Created by Vipin soni on 20-12-2017.
@@ -41,6 +43,8 @@ import cool.test.mycollege.R;
 
 public class TrendingFragment extends Fragment {
     FirebaseDatabase database;
+    FloatingActionButton martadd;
+
     RecyclerView r;
     ProgressBar progressBar;
     @Nullable
@@ -52,6 +56,32 @@ public class TrendingFragment extends Fragment {
         r.setLayoutManager(new LinearLayoutManager(getContext()));
         r.setHasFixedSize(true);
         progressBar=v.findViewById(R.id.progr);
+
+        martadd = v.findViewById(R.id.martadd1);
+
+
+
+        martadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                SharedPreferences sharedPreferences=v.getContext().getSharedPreferences("logindata",Context.MODE_PRIVATE);
+                if (sharedPreferences.getString("isnormallogin","skip").equals("true"))
+                {
+                    startActivity(new Intent(getActivity(),TrendingActivity.class));
+
+                }
+
+                else Toast.makeText(v.getContext(),"Login First",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+
+
+
+
 
 
         return v;

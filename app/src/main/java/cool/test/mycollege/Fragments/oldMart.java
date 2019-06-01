@@ -483,7 +483,7 @@ public class oldMart extends Fragment implements AdapterView.OnItemSelectedListe
                                         });
                                         Log.e("working", "here");
 
-                                        report.child(emailofuser).setValue("Report a Spam").addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        report.child("reportedby").child(emailofuser).setValue("Report a Spam").addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
