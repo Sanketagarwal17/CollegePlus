@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -103,11 +105,15 @@ image.setOnClickListener(new View.OnClickListener() {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
 
-                            Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Please Wait Until Approved By Admin", Toast.LENGTH_LONG).show();
+
+                            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                            String email=firebaseUser.getEmail();
 
                             TrendingActivityModel trendingActivityModel = new TrendingActivityModel(taskSnapshot.getMetadata().getReference().getDownloadUrl().toString()
 
-,name.getText().toString(),description.getText().toString(),contactno.getText().toString(),"0");
+,name.getText().toString(),description.getText().toString(),contactno.getText().toString(),"0",email);
 
                             String uploadId = mDatabase.push().getKey();
                             mDatabase.child(uploadId).setValue(trendingActivityModel);
@@ -126,7 +132,6 @@ image.setOnClickListener(new View.OnClickListener() {
                             //displaying the upload progress
                             double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
                             progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
-                            Toast.makeText(getApplicationContext(), "Please Wait Until Approved By Admin", Toast.LENGTH_LONG).show();
 
                         }
                     });

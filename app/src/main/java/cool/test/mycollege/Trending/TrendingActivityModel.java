@@ -2,14 +2,23 @@ package cool.test.mycollege.Trending;
 
 public class TrendingActivityModel {
 
-    String picurl,productname,productdesc,contactno,report;
+    String picurl,productname,productdesc,contactno,report,email;
 
-    public TrendingActivityModel(String picurl, String productname, String productdesc, String contactno, String report) {
+    public TrendingActivityModel(String picurl, String productname, String productdesc, String contactno, String report, String email) {
         this.picurl = picurl;
         this.productname = productname;
         this.productdesc = productdesc;
         this.contactno = contactno;
         this.report = report;
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getReport() {

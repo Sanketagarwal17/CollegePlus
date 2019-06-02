@@ -486,7 +486,7 @@ public class LostAndFound extends Fragment implements AdapterView.OnItemSelected
                                     });
                                     Log.e("working", "here");
 
-                                    report.child("reportedby").child(emailofuser).setValue("Report a Spam").addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    report.child("reportedby").child(emailofuser).setValue(emailofuser).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
