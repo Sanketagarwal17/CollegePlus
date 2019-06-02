@@ -15,9 +15,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
         <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/martrecyclerview">
+            android:id="@+id/martrecyclerview"
+            android:layout_width="417dp"
+            android:layout_height="510dp"
+            android:layout_marginTop="65dp">
 
         </android.support.v7.widget.RecyclerView>
     </FrameLayout>
