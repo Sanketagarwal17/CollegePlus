@@ -48,10 +48,15 @@ import cool.test.mycollege.Fragments.MyProfileFragment;
 import cool.test.mycollege.Fragments.StudyMaterial;
 import cool.test.mycollege.Fragments.TrendingFragment;
 import cool.test.mycollege.Fragments.WhatToDo;
+import cool.test.mycollege.IntroActivity.OnboardingActivity;
+
+import static cool.test.mycollege.IntroActivity.OnboardingActivity.PREFERENCES_FILE;
 
 public class HomePage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 Intent ii;
+    boolean isUserFirstTime;
+
 FirebaseDatabase database;
 MenuItem menuItem1,menuItem2,menuItem3,blab,menuitem4;
 int once=0;
@@ -59,9 +64,24 @@ int id_01;
     Fragment menuFragment=null;
     int started;
     int menuhandler;
-
+    public static final String PREF_USER_FIRST_TIME = "user_first_time";
+    public static String readSharedSetting(Context ctx, String settingName, String defaultValue) {
+        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+        return sharedPref.getString(settingName, defaultValue);
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+
+        isUserFirstTime = Boolean.valueOf(readSharedSetting(HomePage.this, PREF_USER_FIRST_TIME, "true"));
+
+        Intent introIntent = new Intent(HomePage.this, OnboardingActivity.class);
+        introIntent.putExtra(PREF_USER_FIRST_TIME, isUserFirstTime);
+
+        if (isUserFirstTime)
+            startActivity(introIntent);
+
+
 
         super.onActivityResult(requestCode, resultCode, data);
 

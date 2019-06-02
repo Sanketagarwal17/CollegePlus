@@ -78,7 +78,7 @@
         <activity android:name=".StudyNotes.StudyNotes" />
         <activity android:name=".StudyNotes.UploadStudyNotes"></activity>
         <activity android:name=".Trending.TrendingActivity" />
-
+<activity android:name=".IntroActivity.OnboardingActivity"/>
 
     </application>
 
