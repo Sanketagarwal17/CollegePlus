@@ -94,16 +94,19 @@
 
 
     </RelativeLayout>
-    <Button
-        android:layout_width="150sp"
-        android:layout_height="40sp"
-        android:layout_margin="8sp"
 
+    <Button
         android:id="@+id/report"
-        android:text="report spam"
+        android:layout_width="150sp"
+
+        android:layout_height="40sp"
         android:layout_below="@+id/frt"
         android:layout_centerHorizontal="true"
-        />
+        android:layout_marginStart="8sp"
+        android:layout_marginTop="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginBottom="8sp"
+        android:text="report spam" />
 
 </RelativeLayout>
     </android.support.v7.widget.CardView>

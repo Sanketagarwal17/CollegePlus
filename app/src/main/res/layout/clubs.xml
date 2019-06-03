@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/ple">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_itt"
+        android:background="@drawable/search_background"
+        android:layout_margin="7sp"
+        android:padding="5sp"
+        android:height="50sp"
+        android:hint="Search"
+        android:drawableLeft="@drawable/ic_search_black_24dp"
+        />
+<android.support.v7.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/club_recycler"
+    >
+
+</android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

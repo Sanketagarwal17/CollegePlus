@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -26,7 +27,7 @@ import java.util.Date;
 import cool.test.mycollege.Devs;
 import cool.test.mycollege.EditAttendanceinWeek;
 import cool.test.mycollege.Helpers.AugustineAdapter;
-import cool.test.mycollege.Helpers.MyReceiver;
+import cool.test.mycollege.Helpers.DBTools;
 import cool.test.mycollege.Helpers.WeekSubjectDB;
 import cool.test.mycollege.HomePage;
 import cool.test.mycollege.MyDataTypes.SubjectInfo;
@@ -90,9 +91,13 @@ public class AttendanceFragment extends Fragment {
                 current = elsey;
                 break;
         }
-
-
-        for (int i = 0; i < current.size(); i++) {
+        int j=current.size();
+        int i;
+        if (calendar.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY||calendar.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY)
+        {}
+        else
+            theTempList.add(new SubjectInfo(1011.1));
+        for (i = 0; i < current.size(); i++) {
             SubjectInfo _current = new SubjectInfo();
 
             _current._id = i;
@@ -100,6 +105,25 @@ public class AttendanceFragment extends Fragment {
             theTempList.add(_current);
 
         }
+        theTempList.add(new SubjectInfo(1011.2));
+        theTempList.add(new SubjectInfo(1011.3));
+
+        DBTools a=new DBTools(getContext());
+       current=new ArrayList<>();
+        current=a.getthedamnList();
+
+        for (; i < current.size()+j; i++) {
+            SubjectInfo _current = new SubjectInfo();
+
+            _current._id = i;
+            _current._subjectname = current.get(i-j);
+            theTempList.add(_current);
+
+        }
+
+
+
+
         return theTempList;
     }
     public void shyaugustine(){
@@ -208,12 +232,7 @@ public class AttendanceFragment extends Fragment {
         theCalendar.set(Calendar.SECOND, 1);
 
 
-        Intent notifyIntent = new Intent(v.getContext(), MyReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast
-                (v.getContext(), 2, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) v.getContext().getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, theCalendar.getTimeInMillis(),// this is where the time goes
-                1000 * 60 * 60 * 24, pendingIntent);
+
 
 
 

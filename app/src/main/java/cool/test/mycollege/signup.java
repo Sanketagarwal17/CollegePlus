@@ -22,7 +22,7 @@ public class signup extends AppCompatActivity {
     EditText email,password,name,phone;
     int a=0;
     private FirebaseAuth mAuth;
-    Button go,v;
+    Button go;
 
     @Override
     public void onBackPressed() {

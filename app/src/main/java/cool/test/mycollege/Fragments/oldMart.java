@@ -18,6 +18,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -432,32 +435,86 @@ public class oldMart extends Fragment implements AdapterView.OnItemSelectedListe
 
                     }
                 });
-
+//"OldMart/" + ss
                 report.setOnClickListener(new View.OnClickListener() {
+
                     @Override
                     public void onClick(View v) {
-                        if (f!=-1) {
-                            SharedPreferences prefs = a.getSharedPreferences("logindata", Context.MODE_PRIVATE);
-                            String UID = prefs.getString("UID", "Random");
-                            FirebaseDatabase reportcheck = FirebaseDatabase.getInstance();
-                            DatabaseReference cable;
 
 
-                            DatabaseReference report = reportcheck.getReference("OldMart/" + ss);
-                            report.child("report").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        final SharedPreferences prefs = v.getContext().getSharedPreferences("logindata", Context.MODE_PRIVATE);
+                        if (prefs.getString("isnormallogin", "").equals("true")) {
+
+
+
+
+                            final AlertDialog.Builder alertdialog = new AlertDialog.Builder(v.getContext());
+                            alertdialog.setTitle("Are You Sure You Want to report A spam For this Item");
+                            //     final EditText input = new EditText(v.getContext());
+                            //   LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                            //         LinearLayout.LayoutParams.MATCH_PARENT,
+                            //       LinearLayout.LayoutParams.MATCH_PARENT);
+                            // input.setLayoutParams(lp);
+                            //alertdialog.setView(input);
+                            alertdialog.setIcon(R.drawable.ic_bug_report_black);
+
+                            alertdialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    Toast.makeText(a.getApplicationContext(),"Reported",Toast.LENGTH_SHORT).show();
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
+                                    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                                    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                                    if (f != -1) {
+                                        String UID = prefs.getString("UID", "Random");
+                                        FirebaseDatabase reportcheck = FirebaseDatabase.getInstance();
+                                        DatabaseReference cable;
+
+                                        String email = firebaseUser.getEmail();
+                                        String emailofuser = email.replace('.', ',');
+                                        DatabaseReference report = reportcheck.getReference("OldMart/" + ss);
+
+                                        int r = f + 1;
+                                        report.child("report").setValue(r).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Toast.makeText(a.getApplicationContext(), "Reported", Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        });
+                                        Log.e("working", "here");
+
+                                        report.child("reportedby").child(emailofuser).setValue(emailofuser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Log.e("working", "yes");
+                                                } else {
+                                                    Log.e("working", task.getException().getMessage());
+                                                }
+                                            }
+                                        });
+
+
+                                        //String message=input.grtText().toString();
+                                    } else {
+                                        Toast.makeText(a.getApplicationContext(), "Product already verified by Admin", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                            alertdialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.cancel();
                                 }
                             });
 
+                            alertdialog.show();
+                        }
+                        else
+                        {
+                            Toast.makeText(a.getApplicationContext(),"Login First",Toast.LENGTH_SHORT).show();
 
                         }
-                        else {
-                            Toast.makeText(a.getApplicationContext(),"Product already verified by Admin",Toast.LENGTH_SHORT).show();
-                        }
-
 
                     }
                 });
@@ -552,7 +609,7 @@ public class oldMart extends Fragment implements AdapterView.OnItemSelectedListe
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_old_mart, container, false);
-
+        final SharedPreferences prefs=v.getContext().getSharedPreferences("logindata",Context.MODE_PRIVATE);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         database = FirebaseDatabase.getInstance();
@@ -565,7 +622,10 @@ public class oldMart extends Fragment implements AdapterView.OnItemSelectedListe
         martadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (prefs.getString("isnormallogin","").equals("true"))
                 showdialog();
+                else
+                    Toast.makeText(v.getContext(),"Login First",Toast.LENGTH_SHORT).show();
             }
         });
         CheckMyList();

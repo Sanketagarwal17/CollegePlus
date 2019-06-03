@@ -17,11 +17,18 @@ public class SubjectInfo {
         _attended=0; _bunked=0;
         _percent=0.0;
     }
+    public SubjectInfo(double aaa){
+        _percent=aaa;
+        _attended=0; _bunked=0;
+
+    }
 
 
+    public double get_percent() {
+        return _percent;
+    }
 
-
-   public void attendInitiated()
+    public void attendInitiated()
    {
        _attended++;
        _percent= Double.valueOf(_attended/(_attended+_bunked));

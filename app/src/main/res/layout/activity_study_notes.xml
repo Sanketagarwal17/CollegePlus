@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StudyNotes.StudyNotes">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/allnotesrecycler"
+        android:layout_width="match_parent"
+        android:layout_height="373dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp" />
+
+    <TextView
+        android:id="@+id/year"
+        android:layout_width="174dp"
+        android:layout_height="65dp"
+        android:gravity="center"
+        android:text="Year" />
+
+    <TextView
+        android:id="@+id/branch"
+        android:layout_width="200dp"
+        android:layout_height="62dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:gravity="center"
+        android:text="Branch" />
+
+    <EditText
+        android:id="@+id/searchengine"
+        android:layout_width="362dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="78dp"
+        android:ems="10"
+        android:hint="search name or topic"
+        android:inputType="textPersonName" />
+</RelativeLayout>

@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
@@ -17,17 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
             android:name=".EditAttendanceinWeek"
             android:label="@string/title_activity_attendance"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AttendanceSettingsActivity"
             android:label="@string/attendance_settings"
@@ -41,25 +34,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".EditAttendanceinWeek" />
         </activity>
-
-        <receiver
-            android:name=".Helpers.MyReceiver"
-            android:enabled="true"
-            android:exported="false"></receiver>
-
-        <service
-            android:name=".Helpers.MyNewIntentService"
-            android:exported="false"></service>
-
-        <receiver
-            android:name=".Helpers.CustomNotificationReceiver"
-            android:enabled="true"
-            android:exported="false"></receiver>
-
-        <service
-            android:name=".Helpers.MyNewCustomIntent"
-            android:exported="false"></service>
-
         <activity
             android:name=".HomePage"
             android:label="@string/app_name"
@@ -87,13 +61,24 @@
             android:name=".Myuploads"
             android:label="@string/title_activity_myuploads"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CollegeInfo"
+            android:label="INFO"
+            android:parentActivityName=".HomePage"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
         <activity android:name=".StudyMaterialOnline" />
-        <activity android:name=".Devs"></activity>
+        <activity android:name=".Devs" />
+        <activity android:name=".loopout" />
+        <activity android:name=".StudyNotes.StudyNotes" />
+        <activity android:name=".StudyNotes.UploadStudyNotes" />
+        <activity android:name=".Trending.TrendingActivity" />
+        <activity android:name=".IntroActivity.OnboardingActivity" />
+        <activity android:name=".Rating.RatingAndFeedback"></activity>
     </application>
 
 </manifest>

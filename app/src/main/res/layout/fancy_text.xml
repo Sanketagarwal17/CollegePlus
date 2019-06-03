@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="1sp"
+    android:layout_margin="5sp">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:src="@drawable/back"
+        android:scaleType="fitXY"
+        android:alpha="0.6"
+        />
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:text="Coolness Is Awesome"
+        android:textSize="30sp"
+        android:gravity="center_horizontal"
+        android:textColor="#694f0e"
+        android:padding="5sp"
+        android:id="@+id/seperator_text"
+
+
+        />
+</android.support.v7.widget.CardView>
+
+
+</RelativeLayout>

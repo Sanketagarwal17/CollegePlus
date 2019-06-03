@@ -19,6 +19,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -450,34 +453,90 @@ public class Mart extends Fragment implements AdapterView.OnItemSelectedListener
                     }
                 });
 
+ //"LiveMart/" + ss
+                report=dialogView.findViewById(R.id.report);
+                report.setOnClickListener(new View.OnClickListener() {
 
-                    report.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (f!=-1) {
-                                SharedPreferences prefs = a.getSharedPreferences("logindata", Context.MODE_PRIVATE);
-                                String UID = prefs.getString("UID", "Random");
-                                FirebaseDatabase reportcheck = FirebaseDatabase.getInstance();
-                                DatabaseReference cable;
+                    @Override
+                    public void onClick(View v) {
 
 
-                                DatabaseReference report = reportcheck.getReference("LiveMart/" + ss);
-                                report.child("report").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        Toast.makeText(a.getApplicationContext(),"Reported",Toast.LENGTH_SHORT).show();
+                        final SharedPreferences prefs = v.getContext().getSharedPreferences("logindata", Context.MODE_PRIVATE);
+                        if (prefs.getString("isnormallogin", "").equals("true")) {
 
+
+
+
+                            final AlertDialog.Builder alertdialog = new AlertDialog.Builder(v.getContext());
+                            alertdialog.setTitle("Are You Sure You Want to report A spam For this Item");
+                            //     final EditText input = new EditText(v.getContext());
+                            //   LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                            //         LinearLayout.LayoutParams.MATCH_PARENT,
+                            //       LinearLayout.LayoutParams.MATCH_PARENT);
+                            // input.setLayoutParams(lp);
+                            //alertdialog.setView(input);
+                            alertdialog.setIcon(R.drawable.ic_bug_report_black);
+
+                            alertdialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                                    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                                    if (f != -1) {
+                                        String UID = prefs.getString("UID", "Random");
+                                        FirebaseDatabase reportcheck = FirebaseDatabase.getInstance();
+                                        DatabaseReference cable;
+
+                                        String email = firebaseUser.getEmail();
+                                        String emailofuser = email.replace('.', ',');
+                                        DatabaseReference report = reportcheck.getReference("LiveMart/" + ss);
+
+                                        int r = f + 1;
+                                        report.child("report").setValue(r).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Toast.makeText(a.getApplicationContext(), "Reported", Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        });
+                                        Log.e("working", "here");
+
+                                        report.child("reportedby").child(emailofuser).setValue(emailofuser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Log.e("working", "yes");
+                                                } else {
+                                                    Log.e("working", task.getException().getMessage());
+                                                }
+                                            }
+                                        });
+
+
+                                        //String message=input.grtText().toString();
+                                    } else {
+                                        Toast.makeText(a.getApplicationContext(), "Product already verified by Admin", Toast.LENGTH_SHORT).show();
                                     }
-                                });
+                                }
+                            });
+                            alertdialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.cancel();
+                                }
+                            });
 
-                            }
-                            else {
-                                Toast.makeText(a.getApplicationContext(),"Product already verified by Admin",Toast.LENGTH_SHORT).show();
-                            }
-
+                            alertdialog.show();
+                        }
+                        else
+                        {
+                            Toast.makeText(a.getApplicationContext(),"Login First",Toast.LENGTH_SHORT).show();
 
                         }
-                    });
+
+                    }
+                });
 
 
 
@@ -584,7 +643,11 @@ public class Mart extends Fragment implements AdapterView.OnItemSelectedListener
         martadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                SharedPreferences sharedPreferences=v.getContext().getSharedPreferences("logindata",Context.MODE_PRIVATE);
+                if (sharedPreferences.getString("isnormallogin","skip").equals("true"))
                 showdialog();
+                else Toast.makeText(v.getContext(),"Login First",Toast.LENGTH_SHORT).show();
             }
         });
         CheckMyList();

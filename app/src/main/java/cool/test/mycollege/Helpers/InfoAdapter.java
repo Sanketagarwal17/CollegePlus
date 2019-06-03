@@ -48,7 +48,7 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.MyfuckingHolde
     }
 
     @Override
-    public void onBindViewHolder(final MyfuckingHolder holder, int position) {
+    public void onBindViewHolder(final MyfuckingHolder holder, final int position) {
 
 
         String current = someDamnList.get(position);
@@ -146,6 +146,56 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.MyfuckingHolde
         });
 
 
+        holder.vertIcon_del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+
+                LayoutInflater inflater2 = LayoutInflater.from(theContext);//LayoutInflater.from(AttendanceSettingsActivity.this);
+                final View rootView = inflater2.inflate(R.layout.dialog_empty, null);
+                final DBTools mydb = new DBTools(v.getContext());
+                final WeekSubjectDB theOnlyDB= new WeekSubjectDB(v.getContext());
+                final AlertDialog.Builder builder1 = new AlertDialog.Builder(v.getContext());
+                builder1.setView(rootView);
+                builder1.setMessage("Are you sure you want to delete this subject ?");
+                builder1.setTitle("Confirm Delete");
+                builder1.setCancelable(true);
+
+
+
+                builder1.setPositiveButton(
+                        "YES",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                theDB.deleteData( theSubjectname);
+
+
+                                for(int i=0;i<5;i++)
+                                {
+                                    theOnlyDB.deleteData(theSubjectname,i);
+                                }
+                                someDamnList.remove(theSubjectname);
+                                notifyItemRemoved(position);
+                                notifyItemRangeChanged(position,getItemCount());
+                                dialog.cancel();
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "NO",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Toast.makeText(v.getContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+                                dialog.cancel();
+                            }
+                        });
+
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
+        });
+
     }
 
     @Override
@@ -162,6 +212,7 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.MyfuckingHolde
         TextView percentText;
         TextView TitleText;
         ImageView vertIcon;
+        ImageView vertIcon_del;
         ProgressBar infoBar;
 
 
@@ -172,6 +223,7 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.MyfuckingHolde
             percentText = (TextView) itemView.findViewById(R.id.percent);
             TitleText = (TextView) itemView.findViewById(R.id.subjectTitle);
             vertIcon=(ImageView)itemView.findViewById(R.id.verticon);
+            vertIcon_del=itemView.findViewById(R.id.verticon_del);
             infoBar=(ProgressBar)itemView.findViewById(R.id.infoProgress);
 
 

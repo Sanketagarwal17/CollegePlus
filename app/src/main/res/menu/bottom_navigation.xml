@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single" >
+    <item android:title="Campus"
+    android:id="@+id/campus"
+        android:icon="@drawable/baseline_store_24px">
+
+    </item>
+        <item android:title="Maps"
+            android:id="@+id/maps"
+            android:icon="@drawable/baseline_games_24px">
+
+        </item>
+
+        <item android:title="Clubs &amp; Societies"
+            android:id="@+id/clubs"
+            android:icon="@drawable/baseline_extension_24px">
+
+        </item>
+
+
+    </group>
+</menu>
