@@ -39,6 +39,7 @@ import java.util.ArrayList;
 
 import cool.test.mycollege.Fragments.StudyMaterial;
 import cool.test.mycollege.R;
+import cool.test.mycollege.Rating.RatingAndFeedback;
 
 public class UploadStudyNotes extends AppCompatActivity {
 EditText psubjectname,psubjecttopic;

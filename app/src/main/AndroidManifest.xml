@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
@@ -34,7 +34,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".EditAttendanceinWeek" />
         </activity>
-
         <activity
             android:name=".HomePage"
             android:label="@string/app_name"
@@ -76,10 +75,10 @@
         <activity android:name=".Devs" />
         <activity android:name=".loopout" />
         <activity android:name=".StudyNotes.StudyNotes" />
-        <activity android:name=".StudyNotes.UploadStudyNotes"></activity>
+        <activity android:name=".StudyNotes.UploadStudyNotes" />
         <activity android:name=".Trending.TrendingActivity" />
-<activity android:name=".IntroActivity.OnboardingActivity"/>
-
+        <activity android:name=".IntroActivity.OnboardingActivity" />
+        <activity android:name=".Rating.RatingAndFeedback"></activity>
     </application>
 
 </manifest>
