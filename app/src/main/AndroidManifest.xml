@@ -17,6 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".GoogleSignInActivity"></activity>
+        <activity android:name=".ContactUsActivity" />
         <activity
             android:name=".EditAttendanceinWeek"
             android:label="@string/title_activity_attendance"
@@ -78,7 +80,7 @@
         <activity android:name=".StudyNotes.UploadStudyNotes" />
         <activity android:name=".Trending.TrendingActivity" />
         <activity android:name=".IntroActivity.OnboardingActivity" />
-        <activity android:name=".Rating.RatingAndFeedback"></activity>
+        <activity android:name=".Rating.RatingAndFeedback" />
     </application>
 
 </manifest>

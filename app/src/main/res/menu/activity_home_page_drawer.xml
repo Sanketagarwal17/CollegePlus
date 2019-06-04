@@ -6,7 +6,7 @@
 
 
 
-    <group android:checkableBehavior="none">
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/cattendancemanager"
             android:icon="@drawable/ic_chrome_reader_mode_black_24dp"
@@ -43,13 +43,8 @@
 
     </group>
 
-    <group  android:checkableBehavior="none"
+    <group  android:checkableBehavior="single"
         >
-
-        <item
-            android:id="@+id/csuggestions"
-            android:icon="@drawable/ic_bug_report_black"
-            android:title="Suggestions" />
 
 
         <item
@@ -57,6 +52,14 @@
             android:icon="@drawable/my_profile_draw"
             android:title="My Profile" />
 
+        <item
+            android:id="@+id/cFeedback"
+            android:title="Feedback"/>
+
+        <item
+            android:id="@+id/contact_us"
+            android:title="Contact Us"
+            />
     </group>
 
 

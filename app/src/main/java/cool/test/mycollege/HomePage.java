@@ -1,4 +1,5 @@
 package cool.test.mycollege;
+
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -49,26 +50,28 @@ import cool.test.mycollege.Fragments.StudyMaterial;
 import cool.test.mycollege.Fragments.TrendingFragment;
 import cool.test.mycollege.Fragments.WhatToDo;
 import cool.test.mycollege.IntroActivity.OnboardingActivity;
+import cool.test.mycollege.Rating.RatingAndFeedback;
 
 import static cool.test.mycollege.IntroActivity.OnboardingActivity.PREFERENCES_FILE;
 
 public class HomePage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-Intent ii;
     boolean isUserFirstTime;
 
-FirebaseDatabase database;
-MenuItem menuItem1,menuItem2,menuItem3,blab,menuitem4;
-int once=0;
-int id_01;
-    Fragment menuFragment=null;
+    FirebaseDatabase database;
+    MenuItem menuItem1, menuItem2, menuItem3, blab, menuitem4;
+    int once = 0;
+    int id_01;
+    Fragment menuFragment = null;
     int started;
     int menuhandler;
     public static final String PREF_USER_FIRST_TIME = "user_first_time";
+
     public static String readSharedSetting(Context ctx, String settingName, String defaultValue) {
         SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
         return sharedPref.getString(settingName, defaultValue);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -82,44 +85,39 @@ int id_01;
             startActivity(introIntent);
 
 
-
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode==46||requestCode==47||requestCode==48){
+        if (requestCode == 46 || requestCode == 47 || requestCode == 48) {
             getFragmentManager().beginTransaction().detach(menuFragment).attach(menuFragment).commit();
         }
-       // Toast.makeText(this,String.valueOf(requestCode)+" -  "+String.valueOf(resultCode),Toast.LENGTH_LONG).show();
-        if(requestCode==10){
+        // Toast.makeText(this,String.valueOf(requestCode)+" -  "+String.valueOf(resultCode),Toast.LENGTH_LONG).show();
+        if (requestCode == 10) {
             SharedPreferences prefs = getSharedPreferences("logindata", Context.MODE_PRIVATE);
-            String ss=prefs.getString("issignup","false");
-            SharedPreferences.Editor editor=prefs.edit();
-            editor.putString("issignup","false");
-            String pp=prefs.getString("isnormallogin","false");
-            if(ss.contentEquals("true")&&pp.contentEquals("true"))
-            {
+            String ss = prefs.getString("issignup", "false");
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("issignup", "false");
+            editor.apply();
+            String pp = prefs.getString("isnormallogin", "false");
+            if (ss.contentEquals("true") && pp.contentEquals("true")) {
 
                 createbasicprofile();
 
-            }
-            else if (ss.contentEquals("false")&&pp.contentEquals("false")){
+            } else if (ss.contentEquals("false") && pp.contentEquals("false")) {
                 createbasicprofile();
             }
-
-
-
         }
     }
 
     private void createbasicprofile() {
 
         SharedPreferences prefs = getSharedPreferences("logindata", Context.MODE_PRIVATE);
-        String ss=prefs.getString("UID","Cool");
-        String name=prefs.getString("name","Cool");
-        String username=prefs.getString("ID","Error 404");
-        database=FirebaseDatabase.getInstance();
-        DatabaseReference referencev=database.getReference("Users/"+ss);
+        String ss = prefs.getString("UID", "Cool");
+        String name = prefs.getString("name", "Cool");
+        String username = prefs.getString("ID", "Error 404");
+        database = FirebaseDatabase.getInstance();
+        DatabaseReference referencev = database.getReference("Users/" + ss);
         referencev.child("name").setValue(name);
-        SharedPreferences.Editor editor=prefs.edit();
+        SharedPreferences.Editor editor = prefs.edit();
         //referencev.child("PUN").setValue(0);
 
         referencev.child("email").setValue(username, new DatabaseReference.CompletionListener() {
@@ -139,25 +137,24 @@ int id_01;
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.my_attendance_fragment, menu);
-        started=123;
-         menuItem1 = menu.findItem(R.id.editweek);
+        started = 123;
+        menuItem1 = menu.findItem(R.id.editweek);
         menuItem1.setVisible(true);//
-        menuItem2= menu.findItem(R.id.settings);
+        menuItem2 = menu.findItem(R.id.settings);
         menuItem2.setVisible(false);
-        menuItem3= menu.findItem(R.id.showattendance);
+        menuItem3 = menu.findItem(R.id.showattendance);
         menuItem3.setVisible(true);
-        menuitem4=menu.findItem(R.id.myuploaddd);
+        menuitem4 = menu.findItem(R.id.myuploaddd);
         menuitem4.setVisible(false);
-        blab=menu.findItem(R.id.alarm);
+        blab = menu.findItem(R.id.alarm);
         blab.setVisible(true);
-
 
 
         super.onCreateOptionsMenu(menu);
         return true;
     }
-    public void alarmButtonClicked(final MenuItem item)
-    {
+
+    public void alarmButtonClicked(final MenuItem item) {
         LayoutInflater inflater2 = LayoutInflater.from(this);//LayoutInflater.from(AttendanceSettingsActivity.this);
 
         final View view = inflater2.inflate(R.layout.dialog_alarm, null);
@@ -181,15 +178,11 @@ int id_01;
                         final int theFutureMinute = theFutureHour * 60 + (myTime.getMinute() - theCalendar.get(Calendar.MINUTE));
 
 
-
                         Calendar myCalendar = Calendar.getInstance();
                         myCalendar.setTimeInMillis(System.currentTimeMillis());
                         myCalendar.set(Calendar.HOUR_OF_DAY, myTime.getHour());
                         myCalendar.set(Calendar.MINUTE, myTime.getMinute());
                         myCalendar.set(Calendar.SECOND, 1);
-
-
-
 
 
                         Toast.makeText(view.getContext(), "Class" + " due in " + String.valueOf(theFutureMinute / 60) + " hour(s) and " + String.valueOf(theFutureMinute % 60) + " minute(s)", Toast.LENGTH_SHORT).show();
@@ -217,8 +210,8 @@ int id_01;
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e("hio",String.valueOf(started)+"  "+String.valueOf(menuhandler));
-        if (started==123) {
+        Log.e("hio", String.valueOf(started) + "  " + String.valueOf(menuhandler));
+        if (started == 123) {
             if (menuhandler == 1) {
 
 
@@ -240,32 +233,26 @@ int id_01;
         int id = item.getItemId();
         if (id == R.id.editweek) {
 
-            Intent attendanceIntent = new Intent(this,EditAttendanceinWeek.class);
-            startActivityForResult(attendanceIntent,46);
-        }  else if (id==R.id.settings){
-            Intent attendanceIntent = new Intent(this,AttendanceSettingsActivity.class);
-            startActivityForResult(attendanceIntent,47);
+            Intent attendanceIntent = new Intent(this, EditAttendanceinWeek.class);
+            startActivityForResult(attendanceIntent, 46);
+        } else if (id == R.id.settings) {
+            Intent attendanceIntent = new Intent(this, AttendanceSettingsActivity.class);
+            startActivityForResult(attendanceIntent, 47);
 
-        }else if (id == R.id.showattendance) {
+        } else if (id == R.id.showattendance) {
 
-            Intent attendanceIntent = new Intent(this,AttendanceInfo.class);
-            startActivityForResult(attendanceIntent,48);
+            Intent attendanceIntent = new Intent(this, AttendanceInfo.class);
+            startActivityForResult(attendanceIntent, 48);
 
-        }
-        else if (id== R.id.myuploaddd){
-            Intent i=new Intent(this, Myuploads.class);
+        } else if (id == R.id.myuploaddd) {
+            Intent i = new Intent(this, Myuploads.class);
             startActivity(i);
 
         }
 
 
-
-
-
         return super.onOptionsItemSelected(item);
     }
-
-
 
 
     @Override
@@ -295,15 +282,15 @@ int id_01;
 
         }*/
         setSupportActionBar(toolbar);
-        menuhandler=1;
+        menuhandler = 1;
         SharedPreferences prefs = getSharedPreferences("logindata", Context.MODE_PRIVATE);
 
 
-            if (once==0){
-                    MobileAds.initialize(this, "ca-app-pub-9534694647722812~4161321035");
-                    once=1;
+        if (once == 0) {
+            MobileAds.initialize(this, "ca-app-pub-9534694647722812~4161321035");
+            once = 1;
 
-            }
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -322,19 +309,12 @@ int id_01;
                 .commit();
 
 
-
-
-
-
         checkforpun();
-        if (prefs.getString("isnormallogin","").equals("true")||prefs.getString("isnormallogin","").equals("skip"))
-        {}
-        else {
-            Intent i=new Intent(this,login.class);
-            startActivityForResult(i,10);
+        if (prefs.getString("isnormallogin", "").equals("true") || prefs.getString("isnormallogin", "").equals("skip")) {
+        } else {
+            Intent i = new Intent(this, login.class);
+            startActivityForResult(i, 10);
         }
-
-
 
 
         menuFragment = new AttendanceFragment();
@@ -351,10 +331,9 @@ int id_01;
 
     private void checkforpun() {
         SharedPreferences prefs = getSharedPreferences("logindata", Context.MODE_PRIVATE);
-        String ss=prefs.getString("UID","Cool");
-        int ver=prefs.getInt("VERSON",1);
-        if(ver!=1)
-        {
+        String ss = prefs.getString("UID", "Cool");
+        int ver = prefs.getInt("VERSON", 1);
+        if (ver != 1) {
             AlertDialog alertDialog = new AlertDialog.Builder(HomePage.this).create();
             alertDialog.setTitle("New Verson Required!!");
             alertDialog.setCancelable(false);
@@ -374,9 +353,9 @@ int id_01;
         }
 
 
-        database=FirebaseDatabase.getInstance();
-        DatabaseReference reference=database.getReference();
-        DatabaseReference ref2=reference.child("verson");
+        database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference();
+        DatabaseReference ref2 = reference.child("verson");
         ref2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -385,7 +364,7 @@ int id_01;
 
                 SharedPreferences prefs = getSharedPreferences("logindata", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putInt("VERSON",yoo);
+                editor.putInt("VERSON", yoo);
                 editor.commit();
             }
 
@@ -395,24 +374,23 @@ int id_01;
             }
         });
 
-        DatabaseReference ref=reference.child("Users").child(ss).child("PUN");
+        DatabaseReference ref = reference.child("Users").child(ss).child("PUN");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     int no = dataSnapshot.getValue(int.class);
 
 
-                SharedPreferences prefs = getSharedPreferences("logindata", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putInt("PUN", no);
-                editor.commit();
-            }
-            else{
                     SharedPreferences prefs = getSharedPreferences("logindata", Context.MODE_PRIVATE);
-                    String vil=prefs.getString("UID","NULL");
-                    database=FirebaseDatabase.getInstance();
-                    DatabaseReference rev=database.getReference("Users/"+vil);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putInt("PUN", no);
+                    editor.commit();
+                } else {
+                    SharedPreferences prefs = getSharedPreferences("logindata", Context.MODE_PRIVATE);
+                    String vil = prefs.getString("UID", "NULL");
+                    database = FirebaseDatabase.getInstance();
+                    DatabaseReference rev = database.getReference("Users/" + vil);
                     rev.child("PUN").setValue(0);
                 }
             }
@@ -429,19 +407,18 @@ int id_01;
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else if (menuhandler!=1){
-            menuhandler=1;
+        } else if (menuhandler != 1) {
+            menuhandler = 1;
             menuFragment = new AttendanceFragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.main_fragment, menuFragment)
                     .commit();
 
-        }
-        else {
+        } else {
 
 
-             final AlertDialog.Builder buildd = new AlertDialog.Builder(HomePage.this);
+            final AlertDialog.Builder buildd = new AlertDialog.Builder(HomePage.this);
 
             buildd.setMessage("Do You Want To Exit");
             buildd.setTitle("College +");
@@ -458,12 +435,8 @@ int id_01;
                     dialog.cancel();
                 }
             });
-            AlertDialog fgi=buildd.create();
+            AlertDialog fgi = buildd.create();
             fgi.show();
-
-
-
-
 
 
         }
@@ -476,32 +449,31 @@ int id_01;
 
         // Handle navigation view item clicks here.
         int id;
-        if (item==null)
-            id=R.id.cattendancemanager;
+        if (item == null)
+            id = R.id.cattendancemanager;
         else
-        id = item.getItemId();
-        id_01=id;
-if (id==R.id.cprofile){
-    menuhandler=0;
+            id = item.getItemId();
+        id_01 = id;
+        if (id == R.id.cprofile) {
+            menuhandler = 0;
             menuitem4.setVisible(true);
             menuItem2.setVisible(false);
             blab.setVisible(false);
 
             menuItem1.setVisible(false);
             menuItem3.setVisible(false);
-        }
+        } else if (id == R.id.cattendancemanager) {
+            if (item == null) {
+            } else {
+                menuitem4.setVisible(false);
 
-        else if (id == R.id.cattendancemanager){
-    if (item==null){}
-    else {
-        menuitem4.setVisible(false);
+                menuItem2.setVisible(false);
+                menuItem1.setVisible(true);
+                blab.setVisible(true);
 
-        menuItem2.setVisible(false);
-        menuItem1.setVisible(true);
-        blab.setVisible(true);
-
-        menuItem3.setVisible(true);
-    }}else {
+                menuItem3.setVisible(true);
+            }
+        } else {
             menuitem4.setVisible(false);
             menuItem2.setVisible(false);
             blab.setVisible(false);
@@ -510,55 +482,52 @@ if (id==R.id.cprofile){
             menuItem3.setVisible(false);
         }
 
-            if (id == R.id.ctrending) {
-                menuhandler=0;
+        if (id == R.id.ctrending) {
+            menuhandler = 0;
 
-                menuFragment = new TrendingFragment();
-             FragmentManager fragmentManager = getFragmentManager();
-             fragmentManager.beginTransaction()
-                     .replace(R.id.main_fragment, menuFragment)
-                     .commit();
-
+            menuFragment = new TrendingFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_fragment, menuFragment)
+                    .commit();
 
 
         } else if (id == R.id.cattendancemanager) {
-            menuhandler=1;
-             menuFragment = new AttendanceFragment();
-             FragmentManager fragmentManager = getFragmentManager();
-             fragmentManager.beginTransaction()
-                     .replace(R.id.main_fragment, menuFragment)
-                     .commit();
-
-
+            menuhandler = 1;
+            menuFragment = new AttendanceFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_fragment, menuFragment)
+                    .commit();
 
 
         } else if (id == R.id.cstudymaterial) {
-                menuhandler=0;
+            menuhandler = 0;
 
 
-                menuFragment=new StudyMaterial();
-             FragmentManager fragmentManager = getFragmentManager();
-             fragmentManager.beginTransaction()
-                     .replace(R.id.main_fragment, menuFragment)
-                     .commit();
+            menuFragment = new StudyMaterial();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_fragment, menuFragment)
+                    .commit();
 
         } else if (id == R.id.cmart) {
-                menuhandler=0;
+            menuhandler = 0;
 
-                menuFragment=new MartFragmentMain();
-             FragmentManager fragmentManager = getFragmentManager();
-             fragmentManager.beginTransaction()
-                     .replace(R.id.main_fragment, menuFragment)
-                     .commit();
+            menuFragment = new MartFragmentMain();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_fragment, menuFragment)
+                    .commit();
 
         } else if (id == R.id.clostandfound) {
-                menuhandler=0;
+            menuhandler = 0;
 
-             menuFragment=new LostAndFound();
-             FragmentManager fragmentManager = getFragmentManager();
-             fragmentManager.beginTransaction()
-                     .replace(R.id.main_fragment, menuFragment)
-                     .commit();
+            menuFragment = new LostAndFound();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_fragment, menuFragment)
+                    .commit();
         } /*else if (id == R.id.cwhattodo) {
                 menuhandler=0;
 
@@ -569,34 +538,31 @@ if (id==R.id.cprofile){
                      .commit();
 
 
-        }*/ else if (id == R.id.csuggestions) {
-            /*
-             menuFragment=new CollegeInfo();
-             FragmentManager fragmentManager = getFragmentManager();
-             fragmentManager.beginTransaction()
-                     .replace(R.id.main_fragment, menuFragment)
-                     .commit();*/
-                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto","goldenboatdev@gmail.com", null));
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Suggestions");
-                emailIntent.putExtra(Intent.EXTRA_TEXT, "");
-                startActivity(Intent.createChooser(emailIntent, "Send email..."));
+        }*/
 
-        }
-            else if (id == R.id.ccollegeinfo) {
-            Intent i=new Intent(HomePage.this,CollegeInfo.class);
+        else if (id == R.id.ccollegeinfo) {
+            Intent i = new Intent(HomePage.this, CollegeInfo.class);
             startActivity(i);
 
 
-            }else if (id == R.id.cprofile) {
-                menuhandler=0;
+        } else if (id == R.id.cprofile) {
+            menuhandler = 0;
 
 
-                menuFragment = new MyProfileFragment();
-             FragmentManager fragmentManager = getFragmentManager();
-             fragmentManager.beginTransaction()
-                     .replace(R.id.main_fragment, menuFragment)
-                     .commit();
+            menuFragment = new MyProfileFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_fragment, menuFragment)
+                    .commit();
+        }
+        else if(id == R.id.cFeedback)
+        {
+            startActivity(new Intent(HomePage.this, RatingAndFeedback.class));
+        }
+        else if(id == R.id.contact_us)
+        {
+            startActivity(new Intent(HomePage.this,ContactUsActivity.class));
+
         }
 
 

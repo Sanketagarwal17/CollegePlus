@@ -53,18 +53,13 @@ public class signup extends AppCompatActivity {
                     Toast.makeText(signup.this,"Password should be atleast 6 units",Toast.LENGTH_SHORT).show();
 
                 }
-                else {                    Toast.makeText(signup.this,"Enter all details",Toast.LENGTH_SHORT).show();
+                else {
+                    Toast.makeText(signup.this,"Enter all details",Toast.LENGTH_SHORT).show();
                 }
 
             }
             else {
-
-
-
-
-
                 progressDialog.show();
-
                 mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                         .addOnCompleteListener(signup.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -95,18 +90,9 @@ public class signup extends AppCompatActivity {
 
                             }
                         });
-
-
             }
-
-
-
             }
         });
-
-
-
-
     }
 
     public void verify()
@@ -118,11 +104,8 @@ public class signup extends AppCompatActivity {
                 {
                     finishh();
                 }
-
             }
         });
-
-
     }
     public void finishh(){
         SharedPreferences prefs = getSharedPreferences("logindata", Context.MODE_PRIVATE);

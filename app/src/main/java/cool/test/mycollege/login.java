@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -70,7 +71,6 @@ public class login extends AppCompatActivity implements GoogleApiClient.OnConnec
     protected void onCreate(Bundle savedInstanceState) {
 
 
-
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.login_screen);
@@ -107,6 +107,7 @@ public class login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 alertDialog.setTitle("Password Recovery");
 
                 final EditText input = new EditText(login.this);
+                input.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.MATCH_PARENT);
@@ -244,7 +245,7 @@ public class login extends AppCompatActivity implements GoogleApiClient.OnConnec
                             Toast.makeText(login.this,"Recovery sent to your mail address",Toast.LENGTH_LONG).show();
 
                         }else {
-                            Toast.makeText(login.this,"Error completing your Request",Toast.LENGTH_LONG).show();
+                            Toast.makeText(login.this,task.getException().toString(),Toast.LENGTH_LONG).show();
 
                         }
                     }
