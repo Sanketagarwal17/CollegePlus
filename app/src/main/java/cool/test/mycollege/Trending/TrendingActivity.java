@@ -8,14 +8,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TimePicker;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,17 +31,17 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
+import com.philliphsu.bottomsheetpickers.date.DatePickerDialog;
+import com.philliphsu.bottomsheetpickers.time.BottomSheetTimePickerDialog;
 import java.io.IOException;
-
-
+import java.util.Calendar;
 import cool.test.mycollege.R;
 
-public class TrendingActivity extends AppCompatActivity {
+public class TrendingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, BottomSheetTimePickerDialog.OnTimeSetListener {
     private static final int PICK_IMAGE_REQUEST = 234;
     //uri to store file
     private Uri filePath;
-
+    private static final String TAG = "TrendingActivity";
     //firebase objects
     private StorageReference storageReference;
     private DatabaseReference mDatabase;
@@ -46,11 +51,12 @@ public class TrendingActivity extends AppCompatActivity {
 
     EditText name;
 
-    EditText description;
+    TextInputLayout description;
 
     EditText contactno;
 
     Button addevent;
+    EditText date,time;
 
 
     @Override
@@ -58,14 +64,24 @@ public class TrendingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trending);
 image=findViewById(R.id.eventimage);
-name=findViewById(R.id.event);
-description=findViewById(R.id.eventdescription);
-contactno=findViewById(R.id.contactno1);
-addevent=findViewById(R.id.uploadevent);
+name=findViewById(R.id.AdTitle);
+description=findViewById(R.id.textInputLayout);
+contactno=findViewById(R.id.phone);
+addevent=findViewById(R.id.btn_create);
+date = findViewById(R.id.newAd_etDate);
+time = findViewById(R.id.newAd_etTime);
 
         storageReference = FirebaseStorage.getInstance().getReference();
         mDatabase = FirebaseDatabase.getInstance().getReference(TrendingActivityConstant.DATABASE_PATH_UPLOADS);
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog date = new DatePickerDialog.Builder()
+                        /* ... Set additional options ... */
+                        .build();
 
+            }
+        });
 addevent.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
@@ -96,27 +112,36 @@ image.setOnClickListener(new View.OnClickListener() {
             progressDialog.show();
 
             //getting the storage reference
-            StorageReference sRef = storageReference.child(TrendingActivityConstant.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + "." + getFileExtension(filePath));
+            final StorageReference sRef = storageReference.child(TrendingActivityConstant.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + "." + getFileExtension(filePath));
 
             //adding the file to reference
             sRef.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        public void onSuccess( final UploadTask.TaskSnapshot taskSnapshot) {
+                            sRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String downloadUrl = uri.toString();
+                                    Log.d("uditStorage", downloadUrl);
+                                    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                                    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                                    String email=firebaseUser.getEmail();
+
+                                    TrendingActivityModel trendingActivityModel = new TrendingActivityModel(downloadUrl
+
+                                            ,name.getText().toString(),description.getEditText().getText().toString(),contactno.getText().toString(),"0",email);
+
+                                    String uploadId = mDatabase.push().getKey();
+                                    mDatabase.child(uploadId).setValue(trendingActivityModel);
+
+                                }
+                            });
                             progressDialog.dismiss();
 
                             Toast.makeText(getApplicationContext(), "Please Wait Until Approved By Admin", Toast.LENGTH_LONG).show();
 
-                            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-                            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                            String email=firebaseUser.getEmail();
 
-                            TrendingActivityModel trendingActivityModel = new TrendingActivityModel(taskSnapshot.getMetadata().getReference().getDownloadUrl().toString()
-
-,name.getText().toString(),description.getText().toString(),contactno.getText().toString(),"0",email);
-
-                            String uploadId = mDatabase.push().getKey();
-                            mDatabase.child(uploadId).setValue(trendingActivityModel);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -172,5 +197,27 @@ image.setOnClickListener(new View.OnClickListener() {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+
+    @Override
+    public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
+        Calendar cal = new java.util.GregorianCalendar();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, monthOfYear);
+        cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        date.setText("Date set: " + DateFormat.getDateFormat(this).format(cal.getTime()));
+    }
+
+
+    @Override
+    public void onTimeSet(ViewGroup viewGroup, int hourOfDay, int minute) {
+
     }
 }

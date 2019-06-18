@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class signup extends AppCompatActivity {
 
@@ -71,19 +73,19 @@ public class signup extends AppCompatActivity {
                                     Toast.makeText(signup.this, "Verification email sent to your mail address", Toast.LENGTH_LONG).show();
                                     a = 1;
                                     verify();
-                                    SharedPreferences prefs = getSharedPreferences("logindata", Context.MODE_PRIVATE);
+                                    /*SharedPreferences prefs = getSharedPreferences("logindata", Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = prefs.edit();
                                     editor.putString("name", name.getText().toString());
                                     editor.putString("issignup","true");
                                     editor.putString("UID",task.getResult().getUser().getUid());
-                                    editor.commit();
+                                    editor.commit();*/
 
                                 } else {
                                     progressDialog.dismiss();
 
                                     // If sign in fails, display a message to the user.
 
-                                    Toast.makeText(signup.this, "Process failed. ",
+                                    Toast.makeText(signup.this, "Process failed. " + task.getException().toString(),
                                             Toast.LENGTH_SHORT).show();
 
                                 }
@@ -102,7 +104,35 @@ public class signup extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful())
                 {
-                    finishh();
+                    //finishh();
+                    SharedPreferences sharedPreferences = getSharedPreferences("details_of_login",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("name",name.getText().toString());
+                    editor.putString("email",email.getText().toString());
+                    editor.apply();
+                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    FirebaseDatabase.getInstance().getReference()
+                            .child("Users").child(uid).child("name").setValue(name.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(signup.this, "name added to firebase", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    FirebaseDatabase.getInstance().getReference()
+                            .child("Users").child(uid).child("email").setValue(email.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(signup.this, "email added to firebase", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    FirebaseDatabase.getInstance().getReference()
+                            .child("Users").child(uid).child("type").setValue("Email").addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(signup.this, "type added to firebase", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                 }
             }
         });

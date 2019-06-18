@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +25,9 @@ import cool.test.mycollege.R;
 
 
 public class OnboardingActivity extends AppCompatActivity {
-
+    private static final String TAG = "OnboardingActivity";
     //region Variables
-    static final String TAG = OnboardingActivity.class.getSimpleName()+" YOYO";
+    //static final String TAG = OnboardingActivity.class.getSimpleName()+" YOYO";
     public static final String PREFERENCES_FILE = "TakeIT_Settings";
     private static final Integer nPages = 5;
 
@@ -82,7 +83,7 @@ public class OnboardingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_onboarding);
-
+        Log.d(TAG, "onCreate: onBoarding");
         initVariables();
 
         setUpViewPager();
@@ -134,7 +135,7 @@ public class OnboardingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                saveSharedSetting(OnboardingActivity.this, HomePage.PREF_USER_FIRST_TIME, "false");
+               // saveSharedSetting(OnboardingActivity.this, HomePage.PREF_USER_FIRST_TIME, "false");
             }
         });
 
@@ -142,7 +143,7 @@ public class OnboardingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                saveSharedSetting(OnboardingActivity.this, HomePage.PREF_USER_FIRST_TIME, "false");
+                //saveSharedSetting(OnboardingActivity.this, HomePage.PREF_USER_FIRST_TIME, "false");
             }
         });
     }
@@ -249,11 +250,11 @@ public class OnboardingActivity extends AppCompatActivity {
         //super.onBackPressed();
     }
 
-    public static void saveSharedSetting(Context ctx, String settingName, String settingValue) {
+    /*public static void saveSharedSetting(Context ctx, String settingName, String settingValue) {
         SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(settingName, settingValue);
         editor.apply();
-    }
+    }*/
 
 }

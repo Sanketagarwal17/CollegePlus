@@ -31,6 +31,9 @@ import android.view.View;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -57,7 +60,6 @@ import static cool.test.mycollege.IntroActivity.OnboardingActivity.PREFERENCES_F
 public class HomePage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     boolean isUserFirstTime;
-
     FirebaseDatabase database;
     MenuItem menuItem1, menuItem2, menuItem3, blab, menuitem4;
     int once = 0;
@@ -65,18 +67,10 @@ public class HomePage extends AppCompatActivity
     Fragment menuFragment = null;
     int started;
     int menuhandler;
-    public static final String PREF_USER_FIRST_TIME = "user_first_time";
+    //public static final String PREF_USER_FIRST_TIME = "user_first_time";
 
-    public static String readSharedSetting(Context ctx, String settingName, String defaultValue) {
-        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
-        return sharedPref.getString(settingName, defaultValue);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-
-        isUserFirstTime = Boolean.valueOf(readSharedSetting(HomePage.this, PREF_USER_FIRST_TIME, "true"));
+    /*
+    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         Intent introIntent = new Intent(HomePage.this, OnboardingActivity.class);
         introIntent.putExtra(PREF_USER_FIRST_TIME, isUserFirstTime);
@@ -132,6 +126,7 @@ public class HomePage extends AppCompatActivity
 
 
     }
+    */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -260,37 +255,27 @@ public class HomePage extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-
-
-       /* try {
-            PackageInfo info = getPackageManager().getPackageInfo(
-                    "cool.test.mycollege",
-                    PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-                Log.e("KeyHash:", "thisone1");
-
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e("KeyHash:", "thisone2");
-
-        } catch (NoSuchAlgorithmException e) {
-            Log.e("KeyHash:", "thisone3");
-
-        }*/
         setSupportActionBar(toolbar);
         menuhandler = 1;
-        SharedPreferences prefs = getSharedPreferences("logindata", Context.MODE_PRIVATE);
 
-
-        if (once == 0) {
+        /*if (once == 0) {
             MobileAds.initialize(this, "ca-app-pub-9534694647722812~4161321035");
             once = 1;
 
+        }*/
+        SharedPreferences sp = getSharedPreferences("details_of_login", MODE_PRIVATE);
+        if(sp.getString("first_time",null) == null)
+        {
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("first_time", "false");
+             editor.apply();
+             startActivity(new Intent(HomePage.this,OnboardingActivity.class));
         }
+
+        //SharedPreferences.Editor editor = sp.edit();
+        //editor.putString(KEY_NAME, name);
+
+       // editor.apply();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -309,13 +294,14 @@ public class HomePage extends AppCompatActivity
                 .commit();
 
 
-        checkforpun();
+        //checkforpun();
+        /*
         if (prefs.getString("isnormallogin", "").equals("true") || prefs.getString("isnormallogin", "").equals("skip")) {
         } else {
             Intent i = new Intent(this, login.class);
             startActivityForResult(i, 10);
         }
-
+*/
 
         menuFragment = new AttendanceFragment();
 
@@ -329,7 +315,7 @@ public class HomePage extends AppCompatActivity
     }
 
 
-    private void checkforpun() {
+   /* private void checkforpun() {
         SharedPreferences prefs = getSharedPreferences("logindata", Context.MODE_PRIVATE);
         String ss = prefs.getString("UID", "Cool");
         int ver = prefs.getInt("VERSON", 1);
@@ -401,7 +387,7 @@ public class HomePage extends AppCompatActivity
             }
         });
     }
-
+*/
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

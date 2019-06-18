@@ -15,18 +15,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.facebook.login.LoginManager;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import cool.test.mycollege.R;
 import cool.test.mycollege.login;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Vipin soni on 20-12-2017.
@@ -36,24 +47,54 @@ public class MyProfileFragment extends Fragment {
     Button uploads,chanPass;
     TextView name;
     FirebaseUser firebaseUser;
+    FirebaseAuth firebaseAuth;
     AdView mAdView;
-
+    ImageButton imageButton;
+    SharedPreferences sharedPreferences;
     @Override
-    public void onStart() {
-        super.onStart();
-        if(FirebaseAuth.getInstance().getCurrentUser() == null)
-        {
+    public void onResume() {
+        super.onResume();
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             chanPass.setVisibility(View.GONE);
             uploads.setText("Login");
-        }
-        else
-        {
-            chanPass.setVisibility(View.VISIBLE);
+            name.setText("Login First");
+        } else {
+            for(UserInfo user: FirebaseAuth.getInstance().getCurrentUser().getProviderData()){
+
+                if(user.getProviderId().equals("facebook.com")){
+                    //logged with Facebook
+
+                }
+
+               else if(user.getProviderId().equals("google.com")){
+                    //logged with google
+
+                }
+               else
+                {
+                    chanPass.setVisibility(View.VISIBLE);
+                }
+
+
+            }
+
             uploads.setText("LogOut");
+            String nameFromSP = sharedPreferences.getString("name","Dummy");
+            name.setText(nameFromSP);
+            String image = sharedPreferences.getString("image",null);
+            if(image != "no_user") {
+                Glide.with(getActivity())
+                        .asBitmap().load(image)
+                        .into(imageButton);
+            }
+            else
+            {
+                Glide.with(getActivity())
+                        .load(getResources().getIdentifier("cyber","drawable",getActivity().getPackageName()))
+                        .into(imageButton);
+            }
         }
-        SharedPreferences prefs = getContext().getSharedPreferences("logindata", Context.MODE_PRIVATE);
-        String ss=prefs.getString("name","-Login First-");
-        name.setText(ss);
+
     }
 
     @Nullable
@@ -62,7 +103,10 @@ public class MyProfileFragment extends Fragment {
         View v=inflater.inflate(R.layout.user_profile,container,false);
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         chanPass = v.findViewById(R.id.button2);
-
+        name = v.findViewById(R.id.profile_name);
+        firebaseAuth = FirebaseAuth.getInstance();
+        imageButton = v.findViewById(R.id.user_profile_photo);
+        sharedPreferences = getActivity().getSharedPreferences("details_of_login",getActivity().MODE_PRIVATE);
         chanPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,12 +138,7 @@ public class MyProfileFragment extends Fragment {
                 alert.show();
             }
         });
-        //String namee=firebaseUser.getDisplayName();
-        name=v.findViewById(R.id.profile_name);
-        SharedPreferences prefs = v.getContext().getSharedPreferences("logindata", Context.MODE_PRIVATE);
-        String ss=prefs.getString("name","Your Name");
 
-        name.setText(ss);
         uploads =v.findViewById(R.id.myuploads);
 
 
@@ -108,133 +147,46 @@ public class MyProfileFragment extends Fragment {
         mAdView.loadAd(adRequest);
 
 
-
         uploads.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(FirebaseAuth.getInstance().getCurrentUser() != null) {
-                    Toast.makeText(getActivity(), "user not null", Toast.LENGTH_SHORT).show();
-                    final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-                    LayoutInflater inflater = getActivity().getLayoutInflater();
-                    View dialogView = inflater.inflate(R.layout.dialog_empty, null);
-                    dialogBuilder.setView(dialogView);
-                    dialogBuilder.setTitle("Log Out?");
-                    dialogBuilder.setPositiveButton("Log Out", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            SharedPreferences prefs = getContext().getSharedPreferences("logindata", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = prefs.edit();
-                            editor.putBoolean("islogin", false);
-                            editor.apply();
-                            FirebaseAuth.getInstance().signOut();
-
-                            Intent i = new Intent(getContext(), login.class);
-                            startActivity(i);
-                        }
-                    }).setNegativeButton("cancel", null);
-                    AlertDialog b = dialogBuilder.create();
-                    b.show();
-                }
-                else
-                {
-                    Toast.makeText(getActivity(), "LoginFirst", Toast.LENGTH_SHORT).show();
+    @Override
+    public void onClick(View view) {
+        if(FirebaseAuth.getInstance().getCurrentUser() == null)
+        {
+            startActivity(new Intent(getActivity(),login.class));
+        }
+        else
+        {
+            final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.dialog_empty, null);
+            dialogBuilder.setView(dialogView);
+            dialogBuilder.setTitle("Log Out?");
+            dialogBuilder.setPositiveButton("Log Out", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("details_of_login",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("name","Dummy");
+                    editor.putString("email","Dummy.com");
+                    editor.putString("image","no_user");
+                    editor.apply();
+                    FirebaseAuth.getInstance().signOut();
+                    LoginManager.getInstance().logOut();
                     Intent i = new Intent(getActivity(), login.class);
                     startActivity(i);
+
+
                 }
+            }).setNegativeButton("cancel", null);
 
 
-            }
-        });
-
-
-
-        SharedPreferences sharedPreferences=v.getContext().getSharedPreferences("logindata",Context.MODE_PRIVATE);
-       if (sharedPreferences.getString("isnormallogin","false").equals("skip")){
-            uploads.setText("LogIN");
-
-            uploads.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent k=new Intent(getContext(),login.class);
-                    startActivityForResult(k,142);
-                }
-            });
-
+            AlertDialog b = dialogBuilder.create();
+            b.show();
         }
 
-
+    }
+});
         return v;
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        SharedPreferences sharedPreferences=getContext().getSharedPreferences("logindata",Context.MODE_PRIVATE);
-        if (sharedPreferences.getString("isnormallogin","false").equals("true")){
-            uploads.setText("Log Out");
-
-
-            uploads.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(FirebaseAuth.getInstance().getCurrentUser() != null) {
-                        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-                        LayoutInflater inflater = getActivity().getLayoutInflater();
-                        View dialogView = inflater.inflate(R.layout.dialog_empty, null);
-                        dialogBuilder.setView(dialogView);
-                        dialogBuilder.setTitle("Log Out?");
-                        dialogBuilder.setPositiveButton("Log Out", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                SharedPreferences prefs = getContext().getSharedPreferences("logindata", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = prefs.edit();
-                                editor.putBoolean("islogin", false);
-                                editor.commit();
-                                FirebaseAuth.getInstance().signOut();
-
-                                Intent i = new Intent(getContext(), login.class);
-                                startActivity(i);
-
-
-                            }
-                        }).setNegativeButton("cancel", null);
-
-
-                        AlertDialog b = dialogBuilder.create();
-                        b.show();
-                    }
-                    else
-                    {
-                        Intent i = new Intent(getContext(), login.class);
-                        startActivity(i);
-                    }
-
-
-
-
-
-                }
-            });
-
-
-
-        }
-        else if (sharedPreferences.getString("isnormallogin","false").equals("skip")){
-
-            uploads.setText("LogIN");
-
-            uploads.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent k=new Intent(getContext(),login.class);
-                    startActivity(k);
-                }
-            });
-
-
-        }
-
-
-        }
 }

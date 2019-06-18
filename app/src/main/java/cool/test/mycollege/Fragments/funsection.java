@@ -66,8 +66,6 @@ public class funsection extends Fragment{
 
         View v = inflater.inflate(R.layout.trendingfragment, container, false);
 
-
-
         return v;
     }
 

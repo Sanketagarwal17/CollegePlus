@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -65,8 +66,8 @@ public class TrendingFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                SharedPreferences sharedPreferences=v.getContext().getSharedPreferences("logindata",Context.MODE_PRIVATE);
-                if (sharedPreferences.getString("isnormallogin","skip").equals("true"))
+               // SharedPreferences sharedPreferences=v.getContext().getSharedPreferences("logindata",Context.MODE_PRIVATE);
+                if(FirebaseAuth.getInstance().getCurrentUser()!= null)
                 {
                     startActivity(new Intent(getActivity(),TrendingActivity.class));
 
