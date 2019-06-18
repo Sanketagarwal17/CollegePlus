@@ -76,9 +76,7 @@ time = findViewById(R.id.newAd_etTime);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog date = new DatePickerDialog.Builder()
-                        /* ... Set additional options ... */
-                        .build();
+
 
             }
         });
