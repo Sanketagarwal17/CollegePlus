@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,6 +74,7 @@ public class login extends AppCompatActivity implements GoogleApiClient.OnConnec
     ImageView skip;
     SignInButton signInButton;
     private final int RC_SIGN_IN = 1;
+    ProgressBar progressBar;
     CallbackManager callbackManager;
     private GoogleApiClient googleApiClient;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -86,7 +88,7 @@ public class login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
 
 
-
+        progressBar = findViewById(R.id.progress_bar);
         loginButton = (LoginButton) findViewById(R.id.flogin);
         loginButton.setReadPermissions(Arrays.asList("email", "public_profile"));
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -334,6 +336,7 @@ public class login extends AppCompatActivity implements GoogleApiClient.OnConnec
             GoogleSignInResult googleSignInResult = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if (googleSignInResult.isSuccess()) {
                 GoogleSignInAccount googleSignInAccount = googleSignInResult.getSignInAccount();
+                progressBar.setVisibility(View.VISIBLE);
                 fireBaseAuthWithGoogle(googleSignInAccount);
             } else {
 
@@ -353,6 +356,7 @@ public class login extends AppCompatActivity implements GoogleApiClient.OnConnec
                             // Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(login.this, "google login success", Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                             GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(login.this);
                             if (acct != null) {
                                 String personName = acct.getDisplayName();
