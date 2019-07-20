@@ -462,7 +462,7 @@ public class Mart extends Fragment implements AdapterView.OnItemSelectedListener
 
 
                         final SharedPreferences prefs = v.getContext().getSharedPreferences("logindata", Context.MODE_PRIVATE);
-                        if (prefs.getString("isnormallogin", "").equals("true")) {
+                        if (FirebaseAuth.getInstance().getCurrentUser()!=null) {
 
 
 
@@ -604,8 +604,8 @@ public class Mart extends Fragment implements AdapterView.OnItemSelectedListener
         }
 
         public void setlistener(final String s,final int f) {
-            ImageView b = productview.findViewById(R.id.floatti);
-            b.setOnClickListener(new View.OnClickListener() {
+            //ImageView b = productview.findViewById(R.id.floatti);
+            productview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     ShowMoreInfo(s,f);
@@ -645,7 +645,7 @@ public class Mart extends Fragment implements AdapterView.OnItemSelectedListener
             public void onClick(View v) {
 
                 SharedPreferences sharedPreferences=v.getContext().getSharedPreferences("logindata",Context.MODE_PRIVATE);
-                if (sharedPreferences.getString("isnormallogin","skip").equals("true"))
+                if (FirebaseAuth.getInstance().getCurrentUser()!=null)
                 showdialog();
                 else Toast.makeText(v.getContext(),"Login First",Toast.LENGTH_SHORT).show();
             }
@@ -740,32 +740,7 @@ public class Mart extends Fragment implements AdapterView.OnItemSelectedListener
                     });
 
                     livemart.child("PVN").setValue(-1*System.currentTimeMillis());
-                    livemart.child("email").setValue(username, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-
-                            SharedPreferences prefs = getActivity().getSharedPreferences("logindata", Context.MODE_PRIVATE);
-                            Toast.makeText(getContext(), "Product Uploaded", Toast.LENGTH_SHORT).show();
-                            int a = prefs.getInt("PUN", 0);
-                            a++;
-                            SharedPreferences.Editor editor = prefs.edit();
-                            editor.putInt("PUN", a);
-                            editor.commit();
-
-                            database = FirebaseDatabase.getInstance();
-                            DatabaseReference referencev = database.getReference("Users/" + UID);
-                            referencev.child("PUN").setValue(a);
-
-
-                            if (databaseError != null) {
-                            } else {
-
-                                //close dialoug
-
-
-                            }
-                        }
-                    });
+                    livemart.child("email").setValue(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
                 } else {
                     Toast.makeText(getContext(), "Upload Failed : \nEnter All Fields", Toast.LENGTH_SHORT).show();

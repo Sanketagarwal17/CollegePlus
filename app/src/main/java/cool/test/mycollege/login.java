@@ -263,7 +263,7 @@ public class login extends AppCompatActivity implements GoogleApiClient.OnConnec
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("name",user.getDisplayName());
                             editor.putString("email",user.getEmail());
-                            editor.putString("image",user.getPhotoUrl().toString() + "?height=500");
+                            editor.putString("image",user.getPhotoUrl().toString() + "?height=500" + "?width=1000");
                             editor.apply();
                             FirebaseDatabase.getInstance().getReference().child("Users")
                                     .child(user.getUid()).child("name").setValue(user.getDisplayName());
