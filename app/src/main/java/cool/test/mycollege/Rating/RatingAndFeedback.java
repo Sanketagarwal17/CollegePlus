@@ -92,7 +92,6 @@ public class RatingAndFeedback extends AppCompatActivity {
                         FeedBack feedBack = new FeedBack(String.valueOf(smileRating.getRating()),String.valueOf(radioGroup.indexOfChild(findViewById(radioGroup.getCheckedRadioButtonId()))),editText.getText().toString());
                         FirebaseDatabase.getInstance().getReference().child("Users")
                                 .child(uID).child("FeedBack").setValue(feedBack);
-                        Toast.makeText(RatingAndFeedback.this, "Thanks for your feedback", Toast.LENGTH_SHORT).show();
                     }
 
                 }

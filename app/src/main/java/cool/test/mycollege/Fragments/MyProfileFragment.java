@@ -59,32 +59,30 @@ public class MyProfileFragment extends Fragment {
             uploads.setText("Login");
             name.setText("Login First");
         } else {
-               FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                       .child("type").addValueEventListener(new ValueEventListener() {
-                   @Override
-                   public void onDataChange(DataSnapshot dataSnapshot) {
-                       if(dataSnapshot.getValue()!=null) {
-                           if ((dataSnapshot.getValue()).equals("Email"))
-                               chanPass.setVisibility(View.VISIBLE);
-                           else
-                               chanPass.setVisibility(View.GONE);
-                       }
-                   }
+            for(UserInfo user: FirebaseAuth.getInstance().getCurrentUser().getProviderData()){
 
-                   @Override
-                   public void onCancelled(DatabaseError databaseError) {
+                if(user.getProviderId().equals("facebook.com")){
+                    //logged with Facebook
 
-                   }
-               });
+                }
+
+               else if(user.getProviderId().equals("google.com")){
+                    //logged with google
+
+                }
+               else
+                {
+                    chanPass.setVisibility(View.VISIBLE);
+                }
 
 
             }
 
-            //uploads.setText("LogOut");
-            String nameFromSP = sharedPreferences.getString("name","LOGIN FIRST");
+            uploads.setText("LogOut");
+            String nameFromSP = sharedPreferences.getString("name","Dummy");
             name.setText(nameFromSP);
-            //String image = sharedPreferences.getString("image",null);
-            /*if(image != "no_user") {
+            String image = sharedPreferences.getString("image",null);
+            if(image != "no_user") {
                 Glide.with(getActivity())
                         .asBitmap().load(image)
                         .into(imageButton);
@@ -94,10 +92,10 @@ public class MyProfileFragment extends Fragment {
                 Glide.with(getActivity())
                         .load(getResources().getIdentifier("cyber","drawable",getActivity().getPackageName()))
                         .into(imageButton);
-            }*/
+            }
         }
 
-
+    }
 
     @Nullable
     @Override
@@ -118,7 +116,7 @@ public class MyProfileFragment extends Fragment {
 
                 alert.setView(edittext);
 
-                alert.setPositiveButton("CHANGE", new DialogInterface.OnClickListener() {
+                alert.setPositiveButton("Yes Option", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String value = edittext.getText().toString();
                         FirebaseAuth.getInstance().getCurrentUser().updatePassword(value)
@@ -131,7 +129,7 @@ public class MyProfileFragment extends Fragment {
                     }
                 });
 
-                alert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton("No Option", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         // what ever you want to do with No option.
                     }

@@ -78,6 +78,13 @@ public class TrendingFragment extends Fragment {
             }
         });
 
+
+
+
+
+
+
+
         return v;
     }
 

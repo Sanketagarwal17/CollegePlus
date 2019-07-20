@@ -446,7 +446,7 @@ public class LostAndFound extends Fragment implements AdapterView.OnItemSelected
 
 
                         final SharedPreferences prefs = v.getContext().getSharedPreferences("logindata", Context.MODE_PRIVATE);
-                        if (FirebaseAuth.getInstance().getCurrentUser()!=null) {
+                        if (prefs.getString("isnormallogin", "").equals("true")) {
 
 
 
@@ -624,7 +624,7 @@ public class LostAndFound extends Fragment implements AdapterView.OnItemSelected
             public void onClick(View v) {
 
                 SharedPreferences sharedPreferences=v.getContext().getSharedPreferences("logindata",Context.MODE_PRIVATE);
-                if (FirebaseAuth.getInstance().getCurrentUser()!=null)
+                if (sharedPreferences.getString("isnormallogin","skip").equals("true"))
                     showdialog();
                 else Toast.makeText(v.getContext(),"Login First",Toast.LENGTH_SHORT).show();
 
@@ -718,7 +718,32 @@ public class LostAndFound extends Fragment implements AdapterView.OnItemSelected
                     livemart.child("report").setValue(0);
 
                     livemart.child("PVN").setValue(-1*System.currentTimeMillis());
-                    livemart.child("email").setValue(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                    livemart.child("email").setValue(username, new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+
+                            SharedPreferences prefs = getActivity().getSharedPreferences("logindata", Context.MODE_PRIVATE);
+                            Toast.makeText(getContext(), "Product Uploaded", Toast.LENGTH_SHORT).show();
+                            int a = prefs.getInt("PUN", 0);
+                            a++;
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putInt("PUN", a);
+                            editor.commit();
+
+                            database = FirebaseDatabase.getInstance();
+                            DatabaseReference referencev = database.getReference("Users/" + UID);
+                            referencev.child("PUN").setValue(a);
+
+
+                            if (databaseError != null) {
+                            } else {
+
+                                //close dialoug
+
+
+                            }
+                        }
+                    });
 
                 } else {
                     Toast.makeText(getContext(), "Upload Failed : \nEnter All Fields correctly", Toast.LENGTH_SHORT).show();
